@@ -10,15 +10,13 @@ import Events from '../components/Events'
 export default function Home() {
   return (
     <div>
-      <Banner />
-      <Gallery />
-      <Events />
+      {/* <Banner /> */}
       <UsageSpheres />
-
+      {/* <Events />
+      <Gallery />
       <AddOrder />
       <QA />
-
-      <Footer />
+      <Footer /> */}
     </div>
   )
 }
