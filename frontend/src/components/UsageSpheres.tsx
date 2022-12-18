@@ -1,7 +1,7 @@
 export default function UsageSpheresMob() {
     return (
         <div className='bg-[#1E1F21] p-[30px]'>
-            <div className='flex max-w-[1400px] mx-auto'>
+            <div className='laptop:flex max-w-[1400px] mx-auto'>
                 <div className="pr-4 ">
                     <h2 className='whitespace-nowrap uppercase text-lg text-white font-semibold laptop:text-[30px] laptop:text-white laptop:leading-[40px]'>
                         Сферы применения
