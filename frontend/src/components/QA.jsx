@@ -8,12 +8,12 @@ export default function QA() {
                     <div className='uppercase text-white font-semibold text-2xl ml-6 laptop:text-4xl font-HelveticaNeueCyr'>
                         ответы на вопросы
                     </div>
-                    <div class="max-w-xl mx-auto">
-                        <details class=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg" close>
-                            <summary class="text-lg  laptop:text-2xl leading-6 text-white font-normal select-none">
+                    <div className="max-w-xl mx-auto">
+                        <details className=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg ">
+                            <summary className="text-lg  laptop:text-2xl leading-6 text-white font-normal select-none">
                                 Модель не прилипает к платформе
                             </summary>
-                        <div class="mt-3 text-md leading-6 text-white">
+                        <div className="mt-3 text-md leading-6 text-white">
                             <ul className='sf w-full font-normal'>
                                 <li>Время экспозиции нижнего слоя недостаточно, увеличьте его</li>
                                 <li>Площадь контакта между моделью и платформой мала, отредактируйте модель</li>
@@ -22,11 +22,11 @@ export default function QA() {
                             </ul>
                         </div>
                         </details>
-                        <details class=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg" close>
-                            <summary class="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
+                        <details className=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg close">
+                            <summary className="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
                                 Ошибка печати
                             </summary>
-                            <div class="mt-3 text-md leading-6 text-white">
+                            <div className="mt-3 text-md leading-6 text-white">
                                 <ul className='sf w-full font-normal'>
                                     <li>Если пленка FEP недостаточно плотная или поврежденная, то ее необходимо заменить</li>
                                     <li>Печатная платформа или ванна не затянуты, устраните дефекты</li>
@@ -34,11 +34,11 @@ export default function QA() {
                                 </ul>
                             </div>
                         </details>
-                        <details class=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg" close>
-                            <summary class="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
+                        <details className=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg close">
+                            <summary className="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
                                 Экран-маска не работает
                             </summary>
-                            <div class="mt-3 text-md leading-6 text-white">
+                            <div className="mt-3 text-md leading-6 text-white">
                                 <ul className='sf w-full font-normal'>
                                     <li>Проверьте шлейф соединения с платой. Контакт отсутствует и не выводится изображение</li>
                                     <li>Проверьте файл через программу UV Tools. Файл может быть нарушен или некорректно сохранен. Отформатируйте флешку и сохраните заново</li>
@@ -48,11 +48,11 @@ export default function QA() {
                                 </ul>
                             </div>
                         </details>
-                        <details class=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg" close>
-                            <summary class="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
+                        <details className=" open:ring-1 open:ring-black/5 dark:open:ring-white/10 p-6 rounded-lg close">
+                            <summary className="text-lg laptop:text-2xl  leading-6 text-white font-normal select-none">
                                 Модель расслаивается или&nbsp;образуются дыры
                             </summary>
-                            <div class="mt-3 text-md leading-6 text-white">
+                            <div className="mt-3 text-md leading-6 text-white">
                                 <ul className='sf w-full font-normal'>
                                     <li>Время экспозиции основных слоев недостаточно, увеличьте его</li>
                                     <li>Возможен эффект присоски, добавьте сливные отверстия в модель используя слайсер (если модель пустотелая)</li>

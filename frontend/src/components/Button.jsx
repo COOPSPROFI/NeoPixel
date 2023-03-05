@@ -1,4 +1,5 @@
 
+import React from 'react';
 export default function KnopkaMob() {
     return (
         <div className='visible laptop:invisible z-10 flex justify-center pt-[30px] pb-[30px] mx-auto bg-[#1E1F21] laptop:absolute relative'>
