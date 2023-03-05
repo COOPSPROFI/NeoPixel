@@ -1,7 +1,11 @@
+import PrinterDescription from "../components/PrinterDescription";
+import Specifications from "../components/Specifications";
+
 export default function Printers() {
     return (
-        <div className=''>
-            Printers
+        <div>
+            <PrinterDescription />
+            <Specifications />
         </div>
     )
 }
