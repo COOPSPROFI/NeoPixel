@@ -1,3 +1,4 @@
+import React from 'react';
 export default function PrinterDescription() {
 	return (
 		<div className='bg-[#1E1F21] py-[50px] laptop:py-[100px]'>

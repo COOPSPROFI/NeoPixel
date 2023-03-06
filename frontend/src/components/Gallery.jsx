@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,6 +14,9 @@ import { Pagination, Navigation } from "swiper";
 
 export default function Gallery() {
     const sliderRef = useRef(null);
+
+    console.log(window)
+    const windowWidth = window.innerWidth;
 
     const handlePrev = useCallback(() => {
         if (!sliderRef.current) return;
@@ -43,7 +46,7 @@ export default function Gallery() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={1} spaceBetween={30} slidesPerGroup={3} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
+                <Swiper ref={sliderRef} slidesPerView={windowWidth > 380 ? 3 : 1} spaceBetween={windowWidth > 380 ? 30 : 0} slidesPerGroup={windowWidth > 380 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
                     <SwiperSlide><img src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
