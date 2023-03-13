@@ -36,7 +36,7 @@ export default function UsageSpheresMob() {
                     <h1 className='text-[25px] leading-[27px] mt-2 laptop:mt-8'>Ruby (R Lite / R Pro)</h1>
                     <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
                         <div className='underline cursor-pointer'>Подробнее</div>
-                        <button className='px-5 py-1 border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
+                        <button className='px-5 py-1 hover:bg-[#26AAE1] border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
                     </div>
                 </div>
                 <div className='p-3 laptop:p-7 w-[290px] h-[250px] shadow-2xl laptop:w-[420px] laptop:h-full laptop:shadow-2xl'>
@@ -44,7 +44,7 @@ export default function UsageSpheresMob() {
                     <h1 className='text-[22px] leading-[27px] mt-2 laptop:mt-8'>Sapphire (S Lite / S Pro)</h1>
                     <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
                         <div className='underline cursor-pointer'>Подробнее</div>
-                        <button className='px-5 py-1 border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
+                        <button className='px-5 py-1 hover:bg-[#26AAE1] border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
                     </div>
                 </div>
                 <div className='p-3 laptop:p-7 w-[290px] h-[250px] shadow-2xl laptop:w-[420px] laptop:h-[450px] laptop:hadow-2xl'>
@@ -52,7 +52,7 @@ export default function UsageSpheresMob() {
                     <h1 className='text-[22px] leading-[27px] mt-2 laptop:mt-8'>Heliodorus (H Lite / H Pro)</h1>
                     <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
                         <div className='underline cursor-pointer'>Подробнее</div>
-                        <button className='px-5 py-1 border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
+                        <button className='px-5 py-1 border border-[#26AAE1] rounded-full cursor-pointer hover:bg-[#26AAE1] '>Заказать</button>
                     </div>
                 </div>
             </div>

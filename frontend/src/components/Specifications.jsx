@@ -2,35 +2,48 @@ import React from 'react';
 export default function Specifications() {
     const characteristics = [
         {'key': "Экран экспозиции", 'value': '5,5 дюйма, монохромный'},
-        {'key': "Экран экспозиции", 'value': '5,5 дюйма, монохромный'},
-        {'key': "Экран экспозиции", 'value': '5,5 дюйма, монохромный'},
-        {'key': "Экран экспозиции", 'value': '5,5 дюйма, монохромный'}
+        {'key': "Размеры печати:", 'value': '8 x 13,2 x 8 см (ВШГ)'},
+        {'key': "Коэф-т пропускания света:", 'value': '10%'},
+        {'key': "Коэф-т контрастности:", 'value': '400:1'},
+        {'key': "Источник света:", 'value': 'унифицированная матрица (24 светодиода)'},
+        {'key': "Плотность светового потока:", 'value': '75000 люксов'},
+        {'key': "Мощность матрицы:", 'value': '135 вт'},
+        {'key': "Разрешение дисплея:", 'value': '3 840 x 2400 пикселей (4K)'},
+        {'key': "Размер пикселя:", 'value': '25 мкм'},
+        {'key': "Минимальная высота слоя:", 'value': '10 мкм'},
+        {'key': "Скорость печати:", 'value': '10 см / час'},
+        {'key': "Панель управления:", 'value': 'сенсорный TFT-дисплей с диагональю 3,5 дюйма'},
+        {'key': "Интерфейс обмена данными:", 'value': 'USB-C, Wi-Fi'},
+        {'key': "Источник питания:", 'value': '300 Вт'},
+        {'key': "Программное обеспечение:", 'value': 'Vlare Slicer'},
+        {'key': "Габариты устройства:", 'value': '38 x 22 x 21 см (ВШГ)'},
+        {'key': "Вес устройства:", 'value': '4,5 кг'}
     ]
 
     const dropdownIsActive = false
-    const content = characteristics.map((char) => {
-        return (
-            <div className='flex' >
-                <div className='text-right'>{char.key}</div>
-                <div className='text-left'>{char.value}</div>
-            </div>
-        )
-    })
+    // const content = characteristics.map((char) => {
+    //     return (
+    //         <div className='flex w-[800px]' >
+    //             <div className='text-right pl-[30px]'>{char.key}</div>
+    //             <div className='text-left'>{char.value}</div>
+    //         </div>
+    //     )
+    // })
 	return (
 		<div className='bg-[#171616] py-[50px] laptop:py-[100px]'>
             <div className='laptop:flex max-w-[1400px] mx-auto'>
-                <div className="pr-[300px] ">
-                    <h2 className=' uppercase text-lg text-white font-semibold laptop:text-[30px] laptop:text-white laptop:leading-[40px]'>характеристики принтера</h2>
+                <div className="pr-[100px] ">
+                    <h2 className=' uppercase text-lg text-white font-semibold laptop:text-[30px] laptop:text-white laptop:leading-[40px] w-[404px]'>характеристики принтера</h2>
                 </div>
-                <div className='grid grid-cols-2 text-md text-[#CECECE] w-[800px] laptop:ml-[15px] ml-0 laptop:text-[18px] laptop:leading-[27px]'>
+                <div className='text-md text-[#CECECE] w-[800px] laptop:ml-[15px] ml-0 laptop:text-[18px] laptop:leading-[27px]'>
                     
                     {/* if (index = 5 && dropdownIsActive == true) */}
                     {characteristics.map((char, index) =>
                         // {index < 5 && dropdownIsActive === true
                                 <div className='flex'>
-                                    {index}
-                                    <div className='text-right opacity-50'>{char.key}</div>
-                                    <div className='text-left'>{char.value}</div>
+                                    {/* {index} */}
+                                    <div className='text-right pr-[30px] w-[342px]'>{char.key}</div>
+                                    <div className='text-left w-[450px] opacity-50'>{char.value}</div>
                                 </div>
                         // }
                     )}
@@ -39,42 +52,10 @@ export default function Specifications() {
 
 
                     {/* <div className='grid place-items-end w-[342px] pr-[15px]'>
-                        <div>Экран экспозиции:</div>
-                        <div>Размеры печати:</div>
-                        <div>Коэф-т пропускания света:</div>
-                        <div>Коэф-т контрастности:</div>
-                        <div>Источник света:</div>
-                        <div>Плотность светового потока:</div>
-                        <div>Мощность матрицы:</div>
-                        <div>Разрешение дисплея:</div>
-                        <div>Размер пикселя:</div>
-                        <div>Минимальная высота слоя:</div>
-                        <div>Скорость печати:</div>
-                        <div>Панель управления:</div>
-                        <div>Интерфейс обмена данными:</div>
-                        <div>Источник питания:</div>
-                        <div>Программное обеспечение:</div>
-                        <div>Габариты устройства:</div>
-                        <div>Вес устройства:</div>
+
                     </div> */}
                     {/* <div className='grid place-items-start w-[450px]'>
-                        <div>5,5 дюйма, монохромный</div>
-                        <div>8 x 13,2 x 8 см (ВШГ)</div>
-                        <div>10%</div>
-                        <div>400:1</div>
-                        <div>унифицированная матрица (24 светодиода)</div>
-                        <div>75000 люксов</div>
-                        <div>135 вт</div>
-                        <div>3 840 x 2400 пикселей (4K)</div>
-                        <div>25 мкм</div>
-                        <div>10 мкм</div>
-                        <div>10 см / час</div>
-                        <div>сенсорный TFT-дисплей с диагональю 3,5 дюйма</div>
-                        <div>USB-C, Wi-Fi</div>
-                        <div>300 Вт</div>
-                        <div>Vlare Slicer</div>
-                        <div>38 x 22 x 21 см (ВШГ)</div>
-                        <div>4,5 кг</div>
+
                     </div> */}
                 </div>
             </div>
