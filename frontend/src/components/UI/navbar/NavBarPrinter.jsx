@@ -9,7 +9,7 @@ export default function NavBarPrinter() {
 			</div>
 			<div className='flex laptop:justify-between laptop:items-center laptop:max-w-7xl laptop:mx-auto'>
 				<div className='absolute laptop:relative invisible laptop:visible'>
-					<img src={logo} alt="logo" />
+					<NavLink to="/"><img src={logo} alt="logo" /></NavLink>
 				</div>
 				<div className='flex items-center w-full'>
 					<nav className="flex text-white text-sm flex-row gap-2 mx-auto laptop:gap-10 items-center laptop:leading-6 laptop:text-xl">
@@ -17,6 +17,7 @@ export default function NavBarPrinter() {
 						<NavLink to="/printers" className="text-blue-500">Принтеры</NavLink>
 						<NavLink to="/404" className="hover:text-blue-600">Мероприятия</NavLink>
 						<NavLink to="/404" className="hover:text-blue-600">Контакты</NavLink>
+						<NavLink to="/userspage" className="hover:text-blue-600">Войти</NavLink>
 					</nav>
 				</div>
 			</div>

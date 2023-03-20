@@ -28,7 +28,6 @@ export default function Printers() {
             <AddOrder/>
             <Download/>
             <FooterLite/>
-
         </div>
     )
 }

@@ -1,17 +1,20 @@
-import Banner from '../components/Banner'
 import UsageSpheres from '../components/UsageSpheres'
 import AddOrder from '../components/AddOrder'
 import QA from '../components/QA'
 import Footer from '../components/Footer'
-import Gallery from '../components/Gallery'
+import BannerForUser from '../components/BannerForUser'
+import LoginForUser from '../components/LoginForUser'
+import UsersOrder from '../components/UsersOrder'
 
 
-export default function Home() {
+export default function UsersPage() {
   return (
     <div>
-      <Banner />
+      <BannerForUser />
+      <LoginForUser/>
+      <UsersOrder/>
       <UsageSpheres />
-      <Gallery />
+
       <AddOrder />
       <QA />
       <Footer />

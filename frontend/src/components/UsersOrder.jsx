@@ -12,7 +12,7 @@ import "../index.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 
-export default function Gallery() {
+export default function UsersOrder() {
     const sliderRef = useRef(null);
 
     console.log(window)
@@ -29,10 +29,10 @@ export default function Gallery() {
     }, []);
 
     return (
-        <div className='bg-[#1E1F21] laptop:py-[150px] py-[50px]'>
+        <div className='bg-[#1E1F21] laptop:py-[200px] py-[50px]'>
             <div className="max-w-[1400px] mx-auto">
                 <div className='uppercase text-white flex max-w-[1400px] mx-auto laptop:mb-[140px] mb-[40px] border-b-4 border-white-600 p-[10px] text-2xl place-content-between'>
-                    <div>Галерея</div>
+                    <div>Ваши заказы</div>
                     <div className="flex items-center gap-3">
                         <div onClick={handlePrev}>
                             <svg width="33" height="16" viewBox="0 0 33 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer">
@@ -46,10 +46,37 @@ export default function Gallery() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
-                    <SwiperSlide><img src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
+                <Swiper ref={sliderRef} slidesPerView={windowWidth > 380 ? 3 : 1} spaceBetween={windowWidth > 380 ? 30 : 0} slidesPerGroup={windowWidth > 380 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
+                    <SwiperSlide>
+                            <div className='p-3 laptop:p-7  shadow-2xl laptop:shadow-2xl '>
+                                <img className=' mx-auto ' src={require('../assets/printers/firstPrinter.png')} alt="p1" />
+                                <h1 className='text-[25px] leading-[27px] mt-2 laptop:mt-8'>Ruby (R Lite / R Pro)</h1>
+                                <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
+                                    <div className='underline cursor-pointer'>Подробнее</div>
+                                    <button className='px-5 py-1 hover:bg-[#26AAE1] border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
+                                </div>
+                            </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                            <div className='p-3 laptop:p-7  shadow-2xl laptop:shadow-2xl'>
+                                <img className='w-[89px] h-[146px] mx-auto laptop:w-[250px] laptop:h-[400px]' src={require('../assets/printers/secondPrinter.png')} alt="p2" />
+                                <h1 className='text-[22px] leading-[27px] mt-2 laptop:mt-8'>Sapphire (S Lite / S Pro)</h1>
+                                <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
+                                    <div className='underline cursor-pointer'>Подробнее</div>
+                                    <button className='px-5 py-1 hover:bg-[#26AAE1] border border-[#26AAE1] rounded-full cursor-pointer'>Заказать</button>
+                                </div>
+                            </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                            <div className='p-3 laptop:p-7 shadow-2xl  laptop:hadow-2xl'>
+                                <img className='w-[91px] h-[139px] mx-auto laptop:w-[150px] laptop:h-[250px]' src={require('../assets/printers/thirdPrinter.png')} alt="p3" />
+                                <h1 className='text-[22px] leading-[27px] mt-2 laptop:mt-8'>Heliodorus (H Lite / H Pro)</h1>
+                                <div className='flex items-center justify-between text-[18px] leading-[22px] mt-4 laptop:mt-10'>
+                                    <div className='underline cursor-pointer'>Подробнее</div>
+                                    <button className='px-5 py-1 border border-[#26AAE1] rounded-full cursor-pointer hover:bg-[#26AAE1] '>Заказать</button>
+                                </div>
+                            </div>
+                    </SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 43pic4.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic5.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic6.png')} alt="" /></SwiperSlide>
