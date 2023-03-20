@@ -12,7 +12,7 @@ import "../index.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 
-export default function Exampl() {
+export default function Modern() {
     const sliderRef = useRef(null);
 
     console.log(window)
@@ -32,7 +32,7 @@ export default function Exampl() {
         <div className='bg-[#1E1F21] laptop:py-[200px] py-[50px]'>
             <div className="max-w-[1400px] mx-auto">
                 <div className='uppercase text-white flex max-w-[1400px] mx-auto laptop:mb-[140px] mb-[40px] border-b-4 border-white-600 p-[10px] text-2xl place-content-between'>
-                    <div>Примеры изделий</div>
+                    <div>Дополнительные аксессуары</div>
                     <div className="flex items-center gap-3">
                         <div onClick={handlePrev}>
                             <svg width="33" height="16" viewBox="0 0 33 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer">
@@ -47,15 +47,15 @@ export default function Exampl() {
                     </div>
                 </div>
                 <Swiper ref={sliderRef} slidesPerView={windowWidth > 380 ? 3 : 1} spaceBetween={windowWidth > 380 ? 30 : 0} slidesPerGroup={windowWidth > 380 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
-                    <SwiperSlide><img src={require('../assets/events/image 43pic1 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 44pic2 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 45pic3 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 43pic4 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 44pic5 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 45pic6 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 43pic7 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 44pic8 (2).png')} alt="" /></SwiperSlide>
-                    <SwiperSlide><img src={require('../assets/events/image 45pic9 (2).png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 43pic4.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic5.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic6.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 43pic7.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic8.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic9.png')} alt="" /></SwiperSlide>
                 </Swiper>
             </div>
         </div>

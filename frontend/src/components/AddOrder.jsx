@@ -1,7 +1,7 @@
 import React from 'react';
 export default function AddOrder() {
     return (
-        <div className='bg-[#1E1F21] py-[50px] laptop:py-[100px]'>
+        <div className='bg-[#171616] py-[50px] laptop:py-[100px]'>
             <div className='text-white flex mx-auto  p-[10px] justify-center laptop:max-w-7xl laptop:mb-[140px]'>
                 <div className='text-lg text-white font-HelveticaNeueCyr font-semibold text-center mb-6 laptop:text-5xl'>ПОЛУЧИ КОНСУЛЬТАЦИЮ ОНЛАЙН</div>
             </div>
