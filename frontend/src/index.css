@@ -97,4 +97,10 @@ nav {
 .swiper-button-prev::after {
 	content: "";
 }
+.myTextEventSwiper {
+	width: 600px;
+}
+.myImageEventSwiper {
+	width: 600px;
+}
 

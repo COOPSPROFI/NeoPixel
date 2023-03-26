@@ -12,19 +12,20 @@ import "../index.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 
-export default function Gallery() {
-    const sliderRef = useRef();
+export default function Eve2nts() {
+    const sliderRefText = useRef(null);
+    const sliderRefImage = useRef(null);
 
     const windowWidth = window.innerWidth;
 
     const handlePrev = useCallback(() => {
-        if (!sliderRef.current) return;
-        sliderRef.current.swiper.slidePrev();
+        sliderRefText.current.swiper.slidePrev();
+        sliderRefImage.current.swiper.slidePrev();
     }, []);
 
     const handleNext = useCallback(() => {
-        if (!sliderRef.current) return;
-        sliderRef.current.swiper.slideNext();
+        sliderRefText.current.swiper.slideNext();
+        sliderRefImage.current.swiper.slideNext();
     }, []);
 
     return (
@@ -45,13 +46,24 @@ export default function Gallery() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
+                <Swiper ref={sliderRefText} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
                     <SwiperSlide><img src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 43pic4.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic5.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic6.png')} alt="" /></SwiperSlide>    
+                    <SwiperSlide><img src={require('../assets/events/image 43pic7.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic8.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic9.png')} alt="" /></SwiperSlide>
+                </Swiper>
+                <Swiper ref={sliderRefImage} slidesPerView={1} spaceBetween={0} slidesPerGroup={1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
+                    <SwiperSlide><img src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 43pic4.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 44pic5.png')} alt="" /></SwiperSlide>
+                    <SwiperSlide><img src={require('../assets/events/image 45pic6.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 43pic7.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic8.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic9.png')} alt="" /></SwiperSlide>
