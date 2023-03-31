@@ -4,6 +4,7 @@ import AddOrder from '../components/AddOrder'
 import QA from '../components/QA'
 import Footer from '../components/Footer'
 import Gallery from '../components/Gallery'
+import Carusel from '../components/Carusel/Carusel'
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <AddOrder />
       <QA />
       <Footer />
+      {/* <Carusel/> */}
     </div>
   )
 }

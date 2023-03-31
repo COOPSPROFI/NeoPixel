@@ -46,7 +46,7 @@ export default function Exampl() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={windowWidth > 380 ? 3 : 1} spaceBetween={windowWidth > 380 ? 30 : 0} slidesPerGroup={windowWidth > 380 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
+                <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
                     <SwiperSlide><img src={require('../assets/events/image 43pic1 (2).png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 44pic2 (2).png')} alt="" /></SwiperSlide>
                     <SwiperSlide><img src={require('../assets/events/image 45pic3 (2).png')} alt="" /></SwiperSlide>
