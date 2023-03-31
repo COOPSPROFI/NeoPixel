@@ -4,7 +4,9 @@ import AddOrder from '../components/AddOrder'
 import QA from '../components/QA'
 import Footer from '../components/Footer'
 import Gallery from '../components/Gallery'
-import Carusel from '../components/Carusel/Carusel'
+
+import Events from '../components/Events'
+
 
 
 export default function Home() {
@@ -12,11 +14,11 @@ export default function Home() {
     <div>
       <Banner />
       <UsageSpheres />
+      <Events />
       <Gallery />
       <AddOrder />
       <QA />
       <Footer />
-      {/* <Carusel/> */}
     </div>
   )
 }
