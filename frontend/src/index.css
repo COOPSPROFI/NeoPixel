@@ -87,7 +87,7 @@ nav {
 	height: 30vw;
 	object-fit: cover;
 }
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 420px) {
 	.swiper-slide img {
 		height: 100vw;
 	}
