@@ -1,78 +1,108 @@
 package service
 
 import (
-	"crypto/sha1"
 	"errors"
-	"fmt"
+	"net/http"
+	"os"
 	"time"
 
-	"github.com/COOPSPROFI/NeoPixel/internal/model"
-	"github.com/COOPSPROFI/NeoPixel/internal/repository"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
+	"golang.org/x/crypto/bcrypt"
+	"neopixel3d.ru/internal/model"
 )
 
-const (
-	signingKey = "COOPSPROFI"
-	tokenTTL   = 12 * time.Hour
-)
-
-type tokenClaims struct {
-	jwt.StandardClaims
-	UserId int `json:"user_id"`
+type AuthRepository interface {
+	GetUserByUsernameOrEmail(string, string) model.User
+	GetUserByUsername(string) model.User
+	CreateNewUser(*model.User) error
 }
 
 type AuthService struct {
-	repo repository.Authorization
+	AuthRepository AuthRepository
 }
 
-func NewAuthService(repo repository.Authorization) *AuthService {
-	return &AuthService{repo: repo}
-}
-
-func (s *AuthService) CreateUser(user model.User) (int, error) {
-	user.Password = generateHashPassword(user.Password)
-	return s.repo.CreateUser(user)
-}
-
-func (s *AuthService) GenerateToken(username, password string) (string, error) {
-	user, err := s.repo.GetUser(username, generateHashPassword(password))
-	if err != nil {
-		return "", nil
+func NewAuthService(rep AuthRepository) *AuthService {
+	return &AuthService{
+		AuthRepository: rep,
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
-		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(tokenTTL).Unix(),
-			IssuedAt:  time.Now().Unix(),
-		},
-		user.Id,
+}
+
+func (s *AuthService) Register(c *gin.Context) error {
+	// Get name,username,password off req body
+	var UserInputRegister model.UserInputRegister
+	if c.Bind(&UserInputRegister) != nil {
+		return errors.New("Failed to read request")
+	}
+
+	// Hash the password
+	hash, err := bcrypt.GenerateFromPassword([]byte(UserInputRegister.Password), 10)
+	if err != nil {
+		return errors.New("Failed to hash password")
+	}
+
+	// Validate the user
+	user := s.AuthRepository.GetUserByUsernameOrEmail(UserInputRegister.Username, UserInputRegister.Email)
+	if user.ID != 0 {
+		return errors.New("User with this username or email already exist")
+	}
+
+	// Create the user
+	user = model.User{Name: UserInputRegister.Name, Email: UserInputRegister.Email, Username: UserInputRegister.Username, Password: string(hash)}
+	err = s.AuthRepository.CreateNewUser(&user)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *AuthService) Login(c *gin.Context) string {
+	// Get the email and pass off request body
+	var UserInputLogin model.UserInputLogin
+	if c.Bind(&UserInputLogin) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to read request",
+		})
+	}
+
+	// Look up requested user
+	user := s.AuthRepository.GetUserByUsername(UserInputLogin.Username)
+	if user.ID == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid username or password",
+		})
+		// return ""
+	}
+
+	// Compare sent in pass with saved user pass hash
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(UserInputLogin.Password))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid username or password",
+		})
+		// return ""
+	}
+
+	// Generate a jwt token
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"sub": user.ID,
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
 	})
 
-	return token.SignedString([]byte(signingKey))
-}
+	// Sign and get the complete encoded token as a string using the secret
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 
-func (s *AuthService) ParseToken(accessToken string) (int, error) {
-	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, errors.New("invalid login method")
-		}
-
-		return []byte(signingKey), nil
-	})
 	if err != nil {
-		return 0, err
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid to create token",
+		})
+		// return ""
 	}
 
-	claims, ok := token.Claims.(*tokenClaims)
-	if !ok {
-		return 0, errors.New("token claims are not of type *tokenClaims")
-	}
+	// Respond it back
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 
-	return claims.UserId, nil
-}
-
-func generateHashPassword(password string) string {
-	hash := sha1.New()
-	hash.Write([]byte(password))
-
-	return fmt.Sprintf("%x", hash.Sum([]byte("teststesttsetset")))
+	return tokenString
 }

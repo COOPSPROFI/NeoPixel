@@ -1,22 +1,19 @@
 package repository
 
 import (
-	"github.com/COOPSPROFI/NeoPixel/internal/model"
-	"github.com/jmoiron/sqlx"
+	"github.com/jackc/pgx"
 )
 
-type Authorization interface {
-	CreateUser(user model.User) (int, error)
-	GetUser(username, password string) (model.User, error)
-	GenerateToken(username, password string) (model.User, error)
-}
-
 type Repository struct {
-	Authorization
+	EventRepository   *EventRepository
+	ConsultRepository *ConsultRepository
+	AuthRepository    *AuthRepository
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+func New(conn *pgx.Conn) *Repository {
 	return &Repository{
-		Authorization: NewAuthPostgres(db),
+		EventRepository:   NewEventRepository(conn),
+		ConsultRepository: NewConsultRepository(conn),
+		AuthRepository:    NewAuthRepository(conn),
 	}
 }

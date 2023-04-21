@@ -1,22 +1,21 @@
 package service
 
-import (
-	"github.com/COOPSPROFI/NeoPixel/internal/model"
-	"github.com/COOPSPROFI/NeoPixel/internal/repository"
-)
-
-type Authorization interface {
-	CreateUser(user model.User) (int, error)
-	GenerateToken(username, password string) (string, error)
-	ParseToken(token string) (int, error)
+type Deps struct {
+	EventRepository   EventRepository
+	ConsultRepository ConsultRepository
+	AuthRepository    AuthRepository
 }
 
 type Service struct {
-	Authorization
+	EventService   *EventService
+	ConsultService *ConsultService
+	AuthService    *AuthService
 }
 
-func NewService(repos *repository.Repository) *Service {
+func New(deps Deps) *Service {
 	return &Service{
-		Authorization: NewAuthService(repos.Authorization),
+		EventService:   NewEventService(deps.EventRepository),
+		ConsultService: NewConsultService(deps.ConsultRepository),
+		AuthService:    NewAuthService(deps.AuthRepository),
 	}
 }
