@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,6 +13,13 @@ import Image from 'next/image';
 import { Pagination, Navigation } from "swiper";
 
 export default function Sphers() {
+//помогает с гидратацией --->
+const [domLoaded, setDomLoaded] = useState(false);
+
+useEffect(() => {
+  setDomLoaded(true);
+}, []);
+//<----- помогает с гидратацией
     const sliderRef = useRef(null);
 
 
@@ -49,7 +56,7 @@ export default function Sphers() {
                             </div>
                         </div>
                     </div>
-                    <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[Pagination, Navigation]} className="mySwiper">
+                    {domLoaded && (<Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[Pagination, Navigation]} className="mySwiper">
                         <SwiperSlide><Image src={require('../assets/events/image 43pic1 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Ювелирное дело</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 44pic2 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Стоматология</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 45pic3 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Машиностроение</div></SwiperSlide>
@@ -59,7 +66,7 @@ export default function Sphers() {
                         <SwiperSlide><Image src={require('../assets/events/image 43pic7 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Прототипирование</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 44pic8 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Текстильная промышленность</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 45pic9 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Обувная промышленность</div></SwiperSlide>
-                    </Swiper>
+                    </Swiper>)}
                 </div>
             </div>
         ); 
@@ -82,7 +89,7 @@ export default function Sphers() {
                             </div>
                         </div>
                     </div>
-                    <Swiper ref={sliderRef} slidesPerView={3} spaceBetween={30} slidesPerGroup={3} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
+                    {domLoaded && ( <Swiper ref={sliderRef} slidesPerView={3} spaceBetween={30} slidesPerGroup={3} loop={true} loopFillGroupWithBlank={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
                         <SwiperSlide><Image src={require('../assets/events/image 43pic1 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Ювелирное дело</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 44pic2 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Стоматология</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 45pic3 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Машиностроение</div></SwiperSlide>
@@ -92,7 +99,7 @@ export default function Sphers() {
                         <SwiperSlide><Image src={require('../assets/events/image 43pic7 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Прототипирование</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 44pic8 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Текстильная промышленность</div></SwiperSlide>
                         <SwiperSlide><Image src={require('../assets/events/image 45pic9 (1).png')} alt="" /><div className="absolute text-white text-md bottom-[55px] left-[20px]">Обувная промышленность</div></SwiperSlide>
-                    </Swiper>
+                    </Swiper>)}
                 </div>
             </div>
         ); 

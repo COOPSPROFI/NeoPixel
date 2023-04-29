@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import Gallery from '../components/Gallery'
 // import Events from '../components/Events'
 import Events from '../components/Events'
-import Test from '../components/Test'
+import Login from '../components/Login'
 import '../styles/Home.module.css'
 
 
@@ -15,7 +15,7 @@ import '../styles/Home.module.css'
 export default function Home() {
   return (
     <div>
-      <Test/>
+      <Login/>
       <Banner />
       <UsageSpheres />
       <Events/>

@@ -11,12 +11,14 @@ import (
 
 type Deps struct {
 	EventService   EventService
+	OrderService   OrderService
 	ConsultService ConsultService
 	AuthService    AuthService
 }
 
 type Handler struct {
 	Event   *EventHandler
+	Order   *OrderHandler
 	Consult *ConsultHandler
 	Auth    *AuthHandler
 }
@@ -24,6 +26,7 @@ type Handler struct {
 func New(deps Deps) *Handler {
 	return &Handler{
 		Event:   NewEventHandler(deps.EventService),
+		Order:   NewOrderHandler(deps.OrderService),
 		Consult: NewConsultHandler(deps.ConsultService),
 		Auth:    NewAuthHandler(deps.AuthService),
 	}
@@ -69,6 +72,14 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			events.POST("", h.Event.Create)
 			events.PUT(":id", h.Event.Update)
 			events.DELETE(":id", h.Event.Delete)
+		}
+		orders := api.Group("orders")
+		{
+			orders.GET("", middleware.RequireAuth, h.Order.Get)
+			orders.GET(":id", h.Order.GetById)
+			orders.POST("", h.Order.Create)
+			orders.PUT(":id", h.Order.Update)
+			orders.DELETE(":id", h.Order.Delete)
 		}
 	}
 	return router

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState, useEffect} from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,8 +14,13 @@ import { Pagination, Navigation } from "swiper";
 
 
 export default function Gallery() {
+//помогает с гидратацией --->
+    const [domLoaded, setDomLoaded] = useState(false);
 
-
+    useEffect(() => {
+      setDomLoaded(true);
+    }, []);
+//<----- помогает с гидратацией
         const sliderRef = useRef();
 
     const handlePrev = useCallback(() => {
@@ -28,7 +33,7 @@ export default function Gallery() {
         sliderRef.current.swiper.slideNext();
     }, []);
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
         const windowWidth = window.innerWidth;
     return (
         <div className='bg-[#1E1F21] laptop:py-[150px] py-[50px]'>
@@ -48,7 +53,7 @@ export default function Gallery() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
+               {domLoaded && ( <Swiper ref={sliderRef} slidesPerView={windowWidth > 420 ? 3 : 1} spaceBetween={windowWidth > 420 ? 30 : 0} slidesPerGroup={windowWidth > 420 ? 3 : 1} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
                     <SwiperSlide><Image src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
@@ -58,7 +63,7 @@ export default function Gallery() {
                     <SwiperSlide><Image src={require('../assets/events/image 43pic7.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 44pic8.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 45pic9.png')} alt="" /></SwiperSlide>
-                </Swiper>
+                </Swiper> )}
             </div>
         </div>
     );
@@ -83,7 +88,7 @@ export default function Gallery() {
                         </div>
                     </div>
                 </div>
-                <Swiper ref={sliderRef} slidesPerView={3} spaceBetween={ 30 } slidesPerGroup={ 3 } loop={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
+                {domLoaded && (<Swiper ref={sliderRef} slidesPerView={3} spaceBetween={ 30 } slidesPerGroup={ 3 } loop={true} pagination={{ clickable: true, }} navigation={true} modules={[Pagination, Navigation]} allowTouchMove={false} className="mySwiper">
                     <SwiperSlide><Image src={require('../assets/events/image 43pic1.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 44pic2.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 45pic3.png')} alt="" /></SwiperSlide>
@@ -93,7 +98,7 @@ export default function Gallery() {
                     <SwiperSlide><Image src={require('../assets/events/image 43pic7.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 44pic8.png')} alt="" /></SwiperSlide>
                     <SwiperSlide><Image src={require('../assets/events/image 45pic9.png')} alt="" /></SwiperSlide>
-                </Swiper>
+                </Swiper>)}
             </div>
         </div>
     );
