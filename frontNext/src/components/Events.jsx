@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useEffect, useState } from "react";
+import { getCookie, setCookie } from 'cookies-next';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,6 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from 'next/image';
+ 
 
 
 // import required modules
@@ -16,24 +18,106 @@ import Image from 'next/image';
 export default function Events() {
 	const sliderRefText = useRef(null);
     const sliderRefImage = useRef(null);
+	const [token, setToken] = useState(null);
 	const [events, setEvents] = useState([]);
-	const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxNTAxNDcsInN1YiI6MzB9.qvKCKRhwUTZszR82EB5S1Esl54FPxlQFVh8mL9WAazU";
+	
+	
 
-	useEffect(() => {
-		fetch("https://neopixel.loca.lt/api/events")
-		  .then(res => res.json())
-		  .then(
-			(result) => {
-			  setEvents(result.events);
-			  console.log(result)
-			}
-		  )
-	  }, [])
+	// useEffect(() => {
+	// 	fetch("http://localhost:3000/api/events")
+	// 	  .then(res => res.json())
+	// 	  .then(
+	// 		(result) => {
+	// 		  setEvents(result.events);
+	// 		  console.log(result)
+	// 		}
+	// 	  )
+	//   }, [])
 
+// ----------------------------------------------------------------------
 
+	// useEffect(() => {
+	// 	fetch("http://localhost:3000/api/events", {
+	// 	  headers: {
+	// 		Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQ5MjEyMzEsInN1YiI6MzF9.TM38MHk0MHOE6qZg3BERfK1NvkCTFgSpwJBdp-oUDqw",
+	// 	  },
+	// 	})
+	// 	  .then((res) => res.json())
+	// 	  .then((result) => {
+	// 		setEvents(result.events);
+	// 		console.log(result);
+	// 	  });
+	//   }, []);
 
+	// ------------------------------------------------------------------------------
+									// регистрация
+	// useEffect(() => {
+	// 	// задаем токен
 
+		
+	// 	// выполняем fetch-запрос, добавив токен в заголовки запроса
+	// 	fetch("http://localhost:3000/api/register", {
+	// 	  method: "POST",
+	// 	  body: {
+	// 		"name": "Andrey6",
+	// 		"email": "agd019916@gmail.com",
+	// 		"username": "AGD019916",
+	// 		"password": "12345678"
+	// 	},
+	// 	})
+	// 	  .catch(error => {
+	// 		// логируем ошибку в случае ее возникновения
+	// 		console.error(error);
+	// 	  });
+	//   }, []);
+
+	  	// ------------------------------------------------------------------------------
+									// логин
+	useEffect(async() => {
+		await fetch("http://localhost:3000/api/login", {
+		  method: "POST",
+		  body: {
+			"username": "AGD019912",
+			"password": "12345678"
+		},
+		})
+		  .then((res) => res.json())
+		  .then((result) => {
+			console.log(result);
+			setToken(result.token);
+			console.log(getCookie("Authorization"))
+			console.log(token);
+			setCookie('Authorization', result.token);
+			console.log(getCookie("Authorization"))
+			test()
+
+		});
+	  }, []);
+
+// ----------------------------------------------------------
+
+	const test = () => {
+		// задаем токен
+		// выполняем fetch-запрос, добавив токен в заголовки запроса
+		fetch("http://localhost:3000/api/events", {
+		  method: "GET",
+		  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getCookie("Authorization")}` }
+		})
+		  .then(response => response.json())
+		  .then(responseData => {
+			// обновляем состояние при получении результата запроса
+			setEvents(responseData.events);
+		  })
+		  .catch(error => {
+			// логируем ошибку в случае ее возникновения
+			console.error(error);
+		  });
+	  };
+
+// ---------------------------------------------------------------------------------
 	  
+// { headers: { 'Content-Type': 'application/json', Authorization: Bearer ${Cookies.get("authToken")} } }
+
 
     const handlePrev = useCallback(async() => {
         await sliderRefText.current.swiper.slidePrev();
@@ -44,6 +128,8 @@ export default function Events() {
         await sliderRefText.current.swiper.slideNext();
         await sliderRefImage.current.swiper.slideNext();
     }, []);
+
+	console.log(token);
 
 	return (
 		<div className='bg-[#171616] py-[50px] laptop:py-[100px]'>

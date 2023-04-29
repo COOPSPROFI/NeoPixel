@@ -21,12 +21,14 @@ func main() {
 
 	services := service.New(service.Deps{
 		EventRepository:   db.EventRepository,
+		OrderRepository:   db.OrderRepository,
 		ConsultRepository: db.ConsultRepository,
 		AuthRepository:    db.AuthRepository,
 	})
 
 	handlers := handler.New(handler.Deps{
 		EventService:   services.EventService,
+		OrderService:   services.OrderService,
 		ConsultService: services.ConsultService,
 		AuthService:    services.AuthService,
 	}).Init()

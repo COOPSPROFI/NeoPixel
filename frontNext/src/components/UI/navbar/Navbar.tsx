@@ -18,7 +18,7 @@ export default function Navbar() {
 						<Link href="/Printers" className="hover:text-blue-600">Принтеры</Link>
 						<Link href="/404" className="hover:text-blue-600">Мероприятия</Link>
 						<Link href="/404" className="hover:text-blue-600">Контакты</Link>
-						<Link href="/userspage" className="hover:text-blue-600">Войти</Link>
+						<Link href="/Login" className="hover:text-blue-600">Войти</Link>
 					</nav>
 				</div>
 			</div>

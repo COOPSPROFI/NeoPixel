@@ -72,7 +72,7 @@ func (s *AuthService) Login(c *gin.Context) string {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid username or password",
 		})
-		// return ""
+		return ""
 	}
 
 	// Compare sent in pass with saved user pass hash
@@ -81,7 +81,7 @@ func (s *AuthService) Login(c *gin.Context) string {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid username or password",
 		})
-		// return ""
+		return ""
 	}
 
 	// Generate a jwt token
