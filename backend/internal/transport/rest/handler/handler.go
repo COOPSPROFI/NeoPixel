@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"neopixel3d.ru/internal/transport/rest/middleware"
 )
 
 type Deps struct {
@@ -67,7 +66,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		api.GET("validate", h.Auth.Validate)
 		events := api.Group("events")
 		{
-			events.GET("", middleware.RequireAuth, h.Event.Get)
+			events.GET("", h.Event.Get)
 			events.GET(":id", h.Event.GetById)
 			events.POST("", h.Event.Create)
 			events.PUT(":id", h.Event.Update)
@@ -75,7 +74,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		}
 		orders := api.Group("orders")
 		{
-			orders.GET("", middleware.RequireAuth, h.Order.Get)
+			orders.GET("", h.Order.Get)
 			orders.GET(":id", h.Order.GetById)
 			orders.POST("", h.Order.Create)
 			orders.PUT(":id", h.Order.Update)

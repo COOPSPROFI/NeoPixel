@@ -39,3 +39,14 @@ func (r *OrderRepository) GetAll(ctx *gin.Context) ([]model.Order, error) {
 
 	return orders, nil
 }
+
+func (r *OrderRepository) CreateOrder(ctx *gin.Context, order model.Order) (model.Order, error) {
+	_, err := r.DB.Exec("INSERT INTO orders (email, name, tel, printername, description, date) VALUES ($1, $2, $3, $4, $5, $6)",
+		order.Email, order.Name, order.Tel, order.PrinterName, order.Description, order.Date)
+	if err != nil {
+		fmt.Println("Failed to create order in repository")
+		return model.Order{}, err
+	}
+
+	return order, nil
+}

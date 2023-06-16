@@ -2,122 +2,28 @@ import React, { useCallback, useRef, useEffect, useState } from "react";
 import { getCookie, setCookie } from 'cookies-next';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import axios from 'axios';
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from 'next/image';
- 
-
-
+import Link from "next/link";
 // import required modules
-
 export default function Events() {
 	const sliderRefText = useRef(null);
     const sliderRefImage = useRef(null);
 	const [token, setToken] = useState(null);
 	const [events, setEvents] = useState([]);
-	
-	
-
-	// useEffect(() => {
-	// 	fetch("http://localhost:3000/api/events")
-	// 	  .then(res => res.json())
-	// 	  .then(
-	// 		(result) => {
-	// 		  setEvents(result.events);
-	// 		  console.log(result)
-	// 		}
-	// 	  )
-	//   }, [])
-
-// ----------------------------------------------------------------------
-
-	// useEffect(() => {
-	// 	fetch("http://localhost:3000/api/events", {
-	// 	  headers: {
-	// 		Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQ5MjEyMzEsInN1YiI6MzF9.TM38MHk0MHOE6qZg3BERfK1NvkCTFgSpwJBdp-oUDqw",
-	// 	  },
-	// 	})
-	// 	  .then((res) => res.json())
-	// 	  .then((result) => {
-	// 		setEvents(result.events);
-	// 		console.log(result);
-	// 	  });
-	//   }, []);
-
-	// ------------------------------------------------------------------------------
-									// регистрация
-	// useEffect(() => {
-	// 	// задаем токен
-
-		
-	// 	// выполняем fetch-запрос, добавив токен в заголовки запроса
-	// 	fetch("http://localhost:3000/api/register", {
-	// 	  method: "POST",
-	// 	  body: {
-	// 		"name": "Andrey6",
-	// 		"email": "agd019916@gmail.com",
-	// 		"username": "AGD019916",
-	// 		"password": "12345678"
-	// 	},
-	// 	})
-	// 	  .catch(error => {
-	// 		// логируем ошибку в случае ее возникновения
-	// 		console.error(error);
-	// 	  });
-	//   }, []);
-
-	  	// ------------------------------------------------------------------------------
-									// логин
-	useEffect(async() => {
-		await fetch("http://localhost:3000/api/login", {
-		  method: "POST",
-		  body: {
-			"username": "AGD019912",
-			"password": "12345678"
-		},
+useEffect(() => {
+		axios.get("http://localhost:3000/api/events", {
+			headers: { 'Content-Type': 'application/json', Cookie: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODUzNTY0MDYsInN1YiI6MzF9.VM4s1DxzsNgdUaHQ6fVuJyPm8g704ED4lD5dxkeFx9c` },
 		})
-		  .then((res) => res.json())
 		  .then((result) => {
+			setEvents(result.data.events.reverse());
 			console.log(result);
-			setToken(result.token);
-			console.log(getCookie("Authorization"))
-			console.log(token);
-			setCookie('Authorization', result.token);
-			console.log(getCookie("Authorization"))
-			test()
-
-		});
-	  }, []);
-
-// ----------------------------------------------------------
-
-	const test = () => {
-		// задаем токен
-		// выполняем fetch-запрос, добавив токен в заголовки запроса
-		fetch("http://localhost:3000/api/events", {
-		  method: "GET",
-		  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getCookie("Authorization")}` }
-		})
-		  .then(response => response.json())
-		  .then(responseData => {
-			// обновляем состояние при получении результата запроса
-			setEvents(responseData.events);
-		  })
-		  .catch(error => {
-			// логируем ошибку в случае ее возникновения
-			console.error(error);
 		  });
-	  };
-
-// ---------------------------------------------------------------------------------
-	  
-// { headers: { 'Content-Type': 'application/json', Authorization: Bearer ${Cookies.get("authToken")} } }
-
+	  }, []);
 
     const handlePrev = useCallback(async() => {
         await sliderRefText.current.swiper.slidePrev();
@@ -128,8 +34,6 @@ export default function Events() {
         await sliderRefText.current.swiper.slideNext();
         await sliderRefImage.current.swiper.slideNext();
     }, []);
-
-	console.log(token);
 
 	return (
 		<div className='bg-[#171616] py-[50px] laptop:py-[100px]'>
@@ -152,23 +56,31 @@ export default function Events() {
 				<div className="flex h-[600px] justify-center">
 				{/* ЦИКЛ */}
 					<div className="textplace">
-						<Swiper ref={sliderRefText} slidesPerView={3} spaceBetween={30} slidesPerGroup={1} direction={"vertical"} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[]} allowTouchMove={false} className="myTextEventSwiper">
+						<Swiper ref={sliderRefText} initialSlide={1}  slidesPerView={3} spaceBetween={30} slidesPerGroup={1} direction={"vertical"} loop={false}  pagination={{ clickable: true}} navigation={false} modules={[]} allowTouchMove={false} className="myTextEventSwiper">
+							<SwiperSlide className="border-b-2 mx-auto max-w-[450px] justify-center">
+                                <div className="text-center">Дальше - больше!</div>
+                            </SwiperSlide>
+
 							{events.map((char, index) =>
-								<SwiperSlide key={index} className="block">
-									<div>{char.id}</div>
-									<div>{char.date}</div>
-									<div>{char.title}</div>
-									<div>{char.desc}</div>
+								<SwiperSlide key={index} className="border-b-2 mx-auto max-w-[450px]">
+									<div className="text-base">{char.date}</div>
+									<div className="text-2xl">{char.title}</div>
+									<div className="text-base">{char.desc}</div>
+									<Link href="/" className="text-end ">Подробнее</Link>
 								</SwiperSlide>
 							)}
+							
+                            <SwiperSlide className=" mx-auto max-w-[450px] justify-center">
+                                <div className="text-center" >Это были все наши мероприятия!</div>
+                            </SwiperSlide>
 						</Swiper>
 					</div>
 
 					<div className="imageplace">
-						<Swiper ref={sliderRefImage} initialSlide={1} slidesPerView={1} spaceBetween={0} slidesPerGroup={1} loop={true} pagination={{ clickable: true, }} navigation={false} modules={[]} allowTouchMove={false} className="myImageEventSwiper">
+						<Swiper ref={sliderRefImage} initialSlide={0} slidesPerView={1} spaceBetween={0} slidesPerGroup={1}  loop={false}  pagination={{ clickable: true, }} navigation={false} modules={[]} allowTouchMove={false} className="myImageEventSwiper">
 							{events.map((char, index) =>
 								<SwiperSlide key={index} className="block">
-							<Image src={char.src} fill  alt="" />
+							<img src={char.src} fill  alt="" />
 								</SwiperSlide>
 							)}
 						</Swiper>

@@ -9,10 +9,7 @@ import (
 
 type OrderRepository interface {
 	GetAll(ctx *gin.Context) ([]model.Order, error)
-	// GetById(ctx context.Context, id int32) (*model.Order, error)
-	// Create(ctx context.Context, input *model.CreateOrder) (*model.Order, error)
-	// Update(ctx context.Context, input *model.UpdateOrder) (*model.Order, error)
-	// Delete(ctx context.Context, input *model.DeleteOrder) (*model.Order, error)
+	CreateOrder(ctx *gin.Context, order model.Order) (model.Order, error)
 }
 
 type OrderService struct {
@@ -28,8 +25,17 @@ func NewOrderService(rep OrderRepository) *OrderService {
 func (s *OrderService) GetAll(ctx *gin.Context) ([]model.Order, error) {
 	orders, err := s.OrderRepository.GetAll(ctx)
 	if err != nil {
-		fmt.Println("error in getting from repository orders")
+		fmt.Println("error in getting orders from repository")
 		return nil, err
 	}
 	return orders, nil
+}
+
+func (s *OrderService) CreateOrder(ctx *gin.Context, order model.Order) (model.Order, error) {
+	createdOrder, err := s.OrderRepository.CreateOrder(ctx, order)
+	if err != nil {
+		fmt.Println("error in creating order in repository")
+		return model.Order{}, err
+	}
+	return createdOrder, nil
 }
