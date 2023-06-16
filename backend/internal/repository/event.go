@@ -39,3 +39,14 @@ func (r *EventRepository) GetAll(ctx *gin.Context) ([]model.Event, error) {
 
 	return events, nil
 }
+
+func (r *EventRepository) CreateEvent(ctx *gin.Context, event model.Event) (model.Event, error) {
+	_, err := r.DB.Exec("INSERT INTO events (name, description, date, img) VALUES ($1, $2, $3, $4)",
+		event.Title, event.Description, event.Date, event.Img)
+	if err != nil {
+		fmt.Println("Failed to create Event in repository")
+		return model.Event{}, err
+	}
+
+	return event, nil
+}

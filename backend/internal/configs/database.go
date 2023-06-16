@@ -10,9 +10,6 @@ import (
 
 var DB *pgx.Conn
 
-// один раз объявил переменную
-// передаешь ССЫЛКУ на переменную
-
 func ConnectToDB() {
 	config, err := pgx.ParseURI(os.Getenv("ConnURI"))
 	if err != nil {
