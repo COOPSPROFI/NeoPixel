@@ -12,9 +12,7 @@ type EventService interface {
 	GetAll(ctx *gin.Context) ([]model.Event, error)
 	GetById(ctx *gin.Context, id int64) (*model.Event, error)
 	CreateEvent(ctx *gin.Context, event model.Event) (model.Event, error)
-	// Create(ctx context.Context, input *model.CreateEvent) (*model.Event, error)
-	// Update(ctx context.Context, input *model.UpdateEvent) (*model.Event, error)
-	// Delete(ctx context.Context, input *model.DeleteEvent) (*model.Event, error)
+	DeleteEvent(ctx *gin.Context, id int64) error
 }
 
 type EventHandler struct {
@@ -92,10 +90,28 @@ func (h *EventHandler) Create(c *gin.Context) {
 	})
 }
 
-func (h *EventHandler) Update(c *gin.Context) {
-
-}
-
 func (h *EventHandler) Delete(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid event ID",
+		})
+		return
+	}
+
+	err = h.service.DeleteEvent(c, id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Failed to delete event",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Event deleted successfully",
+	})
+}
+func (h *EventHandler) Update(c *gin.Context) {
 
 }

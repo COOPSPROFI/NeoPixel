@@ -64,3 +64,12 @@ func (r *EventRepository) GetById(ctx *gin.Context, id int64) (*model.Event, err
 	}
 	return event, nil
 }
+
+func (r *EventRepository) DeleteEvent(ctx *gin.Context, id int64) error {
+	_, err := r.DB.Exec("DELETE FROM events WHERE id = $1", id)
+	if err != nil {
+		fmt.Println("Failed to delete event from repository")
+		return err
+	}
+	return nil
+}

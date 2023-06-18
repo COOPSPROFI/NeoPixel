@@ -16,4 +16,5 @@ type CreateEvent struct {
 type UpdateEvent struct {
 }
 type DeleteEvent struct {
+	ID int64 `json:"id"`
 }
