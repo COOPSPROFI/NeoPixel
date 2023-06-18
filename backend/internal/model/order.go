@@ -8,6 +8,7 @@ type Order struct {
 	PrinterName string `db:"printername" json:"printername"`
 	Description string `db:"desc" json:"desc"`
 	Date        string `db:"date" json:"date"`
+	Status      string `db:"status" json:"status"`
 }
 type CreateOrder struct {
 	ID          int64  `json:"id"`
@@ -17,6 +18,7 @@ type CreateOrder struct {
 	PrinterName string `json:"printername"`
 	Description string `json:"desc"`
 	Date        string `json:"date"`
+	Status      string `json:"status"`
 }
 type UpdateOrder struct {
 }

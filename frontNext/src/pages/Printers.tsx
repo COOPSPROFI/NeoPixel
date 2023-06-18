@@ -11,10 +11,12 @@ import Specifications from "../components/Specifications";
 import Sphers from "../components/Sphers";
 import Vlare from "../components/Vlare";
 import Comfort from "../components/Сomfort";
+import OrderTable from '../components/OrderTable'
 
 export default function Printers() {
     return (
         <div>
+            <OrderTable/>
             <BannerForPrinter/>
             <PrinterDescription />
             <Specifications />
