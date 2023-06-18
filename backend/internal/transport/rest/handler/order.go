@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"neopixel3d.ru/internal/model"
@@ -10,7 +11,9 @@ import (
 type OrderService interface {
 	GetAll(ctx *gin.Context) ([]model.Order, error)
 	CreateOrder(ctx *gin.Context, order model.Order) (model.Order, error)
-	// Implement other methods for GetById, Update, and Delete
+	GetOrderById(ctx *gin.Context, id int64) (model.Order, error)
+	UpdateOrderStatus(ctx *gin.Context, id int64, status string) error // Added method for updating order status
+	// Implement other methods for Update and Delete
 }
 
 type OrderHandler struct {
@@ -59,7 +62,56 @@ func (h *OrderHandler) Create(c *gin.Context) {
 }
 
 func (h *OrderHandler) GetById(c *gin.Context) {
-	// Implement logic to get order by ID
+	id := c.Param("id")
+	orderID, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid order ID",
+		})
+		return
+	}
+
+	order, err := h.service.GetOrderById(c, orderID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"message": "Order not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"order": order,
+	})
+}
+
+func (h *OrderHandler) UpdateStatus(c *gin.Context) {
+	id := c.Param("id")
+	orderID, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid order ID",
+		})
+		return
+	}
+
+	var updateOrder model.UpdateOrder
+	if err := c.ShouldBindJSON(&updateOrder); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid request body",
+		})
+		return
+	}
+
+	if err := h.service.UpdateOrderStatus(c, orderID, updateOrder.Status); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Failed to update order status",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Order status updated successfully",
+	})
 }
 
 func (h *OrderHandler) Update(c *gin.Context) {
