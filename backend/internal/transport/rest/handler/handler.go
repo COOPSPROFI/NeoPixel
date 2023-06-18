@@ -79,6 +79,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			orders.POST("", h.Order.Create)
 			orders.PUT(":id", h.Order.Update)
 			orders.DELETE(":id", h.Order.Delete)
+			orders.PUT(":id/status", h.Order.UpdateStatus) // New route for updating order status
 		}
 	}
 	return router

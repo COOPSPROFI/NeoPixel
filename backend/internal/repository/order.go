@@ -56,3 +56,28 @@ func (r *OrderRepository) CreateOrder(ctx *gin.Context, order model.Order) (mode
 	order.Status = defaultStatus
 	return order, nil
 }
+
+func (r *OrderRepository) GetOrderById(ctx *gin.Context, id int64) (model.Order, error) {
+	row := r.DB.QueryRow("SELECT id, email, name, tel, printername, description, date, status FROM orders WHERE id = $1", id)
+
+	var order model.Order
+	err := row.Scan(&order.ID, &order.Email, &order.Name, &order.Tel, &order.PrinterName, &order.Description, &order.Date, &order.Status)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return model.Order{}, fmt.Errorf("order not found")
+		}
+		fmt.Println("Failed to get order by ID in repository")
+		return model.Order{}, err
+	}
+
+	return order, nil
+}
+
+func (r *OrderRepository) UpdateOrderStatus(ctx *gin.Context, id int64, status string) error {
+	_, err := r.DB.Exec("UPDATE orders SET status = $1 WHERE id = $2", status, id)
+	if err != nil {
+		fmt.Println("Failed to update order status in repository")
+		return err
+	}
+	return nil
+}

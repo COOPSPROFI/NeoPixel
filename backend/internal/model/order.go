@@ -21,6 +21,7 @@ type CreateOrder struct {
 	Status      string `json:"status"`
 }
 type UpdateOrder struct {
+	Status string `json:"status"`
 }
 type DeleteOrder struct {
 }

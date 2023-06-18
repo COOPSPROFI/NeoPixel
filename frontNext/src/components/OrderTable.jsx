@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 export default function OrdersTable() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetchOrders();
+    axios.get("http://localhost:3000/api/orders")
+      .then((result) => {
+        setOrders(result.data.orders);
+        console.log(result);
+      });
   }, []);
 
-  const fetchOrders = () => {
-    axios.get("http://localhost:3000/api/orders").then((response) => {
-      setOrders(response.data.orders);
-      console.log(response);
-    });
-  };
-
-  const updateOrderStatus = (orderId, status) => {
-    axios
-      .put(`http://localhost:3000/api/orders/${orderId}/status/${status}`)
-      .then((response) => {
-        console.log(response);
-        fetchOrders(); // Refresh orders after updating status
+  const handleStatusChange = (orderId, status) => {
+    axios.put(`http://localhost:3000/api/orders/${orderId}/status`, { status })
+      .then((result) => {
+        console.log(result);
+        // Update the order status in the local state
+        const updatedOrders = orders.map(order => {
+          if (order.id === orderId) {
+            return {
+              ...order,
+              status: status
+            };
+          }
+          return order;
+        });
+        setOrders(updatedOrders);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -45,12 +51,11 @@ export default function OrdersTable() {
             <th>Описание</th>
             <th>Дата</th>
             <th>Статус</th>
-            <th>Изменить статус</th> {/* Добавлено новое поле */}
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
+          {orders.map((order, index) => (
+            <tr key={index}>
               <td>{order.id}</td>
               <td>{order.email}</td>
               <td>{order.name}</td>
@@ -58,18 +63,15 @@ export default function OrdersTable() {
               <td>{order.printername}</td>
               <td>{order.desc}</td>
               <td>{order.date}</td>
-              <td>{order.status}</td>
               <td>
-                <button
-                  onClick={() => updateOrderStatus(order.id, "в работе")}
+                <select
+                  value={order.status}
+                  onChange={(e) => handleStatusChange(order.id, e.target.value)}
                 >
-                  В работе
-                </button>
-                <button
-                  onClick={() => updateOrderStatus(order.id, "готов")}
-                >
-                  Готов
-                </button>
+                  <option value="ожидание">Ожидание</option>
+                  <option value="в работе">В работе</option>
+                  <option value="готов">Готов</option>
+                </select>
               </td>
             </tr>
           ))}
