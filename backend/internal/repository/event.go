@@ -65,6 +65,23 @@ func (r *EventRepository) GetById(ctx *gin.Context, id int64) (*model.Event, err
 	return event, nil
 }
 
+func (r *EventRepository) UpdateEvent(ctx *gin.Context, id int64, event model.UpdateEvent) (*model.Event, error) {
+	_, err := r.DB.Exec("UPDATE events SET name = $1, description = $2, date = $3, img = $4 WHERE id = $5",
+		event.Title, event.Description, event.Date, event.Img, id)
+	if err != nil {
+		fmt.Println("Failed to update event in repository")
+		return nil, err
+	}
+
+	updatedEvent, err := r.GetById(ctx, id) // Получите обновленное мероприятие с помощью метода GetById
+	if err != nil {
+		fmt.Println("Failed to get updated event from repository")
+		return nil, err
+	}
+
+	return updatedEvent, nil
+}
+
 func (r *EventRepository) DeleteEvent(ctx *gin.Context, id int64) error {
 	_, err := r.DB.Exec("DELETE FROM events WHERE id = $1", id)
 	if err != nil {

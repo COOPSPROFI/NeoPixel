@@ -13,6 +13,7 @@ type EventService interface {
 	GetById(ctx *gin.Context, id int64) (*model.Event, error)
 	CreateEvent(ctx *gin.Context, event model.Event) (model.Event, error)
 	DeleteEvent(ctx *gin.Context, id int64) error
+	UpdateEvent(ctx *gin.Context, id int64, event model.UpdateEvent) (*model.Event, error)
 }
 
 type EventHandler struct {
@@ -112,6 +113,34 @@ func (h *EventHandler) Delete(c *gin.Context) {
 		"message": "Event deleted successfully",
 	})
 }
-func (h *EventHandler) Update(c *gin.Context) {
 
+func (h *EventHandler) Update(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid event ID",
+		})
+		return
+	}
+
+	var updateEvent model.UpdateEvent
+	if err := c.ShouldBindJSON(&updateEvent); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid request body",
+		})
+		return
+	}
+
+	updatedEvent, err := h.service.UpdateEvent(c, id, updateEvent)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Failed to update event",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"event": updatedEvent,
+	})
 }
