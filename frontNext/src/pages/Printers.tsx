@@ -11,12 +11,14 @@ import Specifications from "../components/Specifications";
 import Sphers from "../components/Sphers";
 import Vlare from "../components/Vlare";
 import Comfort from "../components/Сomfort";
-import OrderTable from '../components/OrderTable'
+import OrderTable from '../components/OrderTable';
+import EventsTable from '../components/EventsTable'
 
 export default function Printers() {
     return (
         <div>
-            <OrderTable/>
+            {/* <OrderTable/> */}
+            <EventsTable/>
             <BannerForPrinter/>
             <PrinterDescription />
             <Specifications />
