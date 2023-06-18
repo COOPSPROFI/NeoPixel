@@ -10,11 +10,7 @@ import (
 type EventRepository interface {
 	GetAll(ctx *gin.Context) ([]model.Event, error)
 	CreateEvent(ctx *gin.Context, event model.Event) (model.Event, error)
-
-	// GetById(ctx context.Context, id int32) (*model.Event, error)
-	// Create(ctx context.Context, input *model.CreateEvent) (*model.Event, error)
-	// Update(ctx context.Context, input *model.UpdateEvent) (*model.Event, error)
-	// Delete(ctx context.Context, input *model.DeleteEvent) (*model.Event, error)
+	GetById(ctx *gin.Context, id int64) (*model.Event, error)
 }
 
 type EventService struct {
@@ -43,4 +39,13 @@ func (s *EventService) CreateEvent(ctx *gin.Context, event model.Event) (model.E
 		return model.Event{}, err
 	}
 	return createdEvent, nil
+}
+
+func (s *EventService) GetById(ctx *gin.Context, id int64) (*model.Event, error) {
+	event, err := s.EventRepository.GetById(ctx, id)
+	if err != nil {
+		fmt.Println("error in getting event by ID from repository")
+		return nil, err
+	}
+	return event, nil
 }

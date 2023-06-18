@@ -50,3 +50,17 @@ func (r *EventRepository) CreateEvent(ctx *gin.Context, event model.Event) (mode
 
 	return event, nil
 }
+
+func (r *EventRepository) GetById(ctx *gin.Context, id int64) (*model.Event, error) {
+	row := r.DB.QueryRow("SELECT id, name, description, date, img FROM events WHERE id = $1", id)
+	event := &model.Event{}
+	err := row.Scan(&event.ID, &event.Title, &event.Description, &event.Date, &event.Img)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil // Запись с указанным идентификатором не найдена
+		}
+		fmt.Println("Failed to get event by ID from repository")
+		return nil, err
+	}
+	return event, nil
+}
