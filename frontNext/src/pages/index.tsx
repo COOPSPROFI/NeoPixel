@@ -12,7 +12,8 @@ import AddUserForm from '../components/AddUserForm'
 import AddEventForm2 from '../components/AddEventForm2'
 import Calcul from '../components/Calcul'
 import '../styles/Home.module.css'
-
+import Model from '../components/Model' 
+import TextModel from '../components/TextModel'
 
 
 
@@ -22,14 +23,17 @@ export default function Home() {
       {/* <Login/> */}
       {/* <AddUserForm/> */}
       {/* <Calcul/> */}
+       
       <AddOrder/>
       <AddEventForm2/>
       <Banner />
       <UsageSpheres />
+      <TextModel/>
       <Events/>
       {/* <EventNoApi/> */}
       <Gallery />     
-      <AddOrder />
+      <AddOrder /> 
+
       <QA />
       <Footer />
     </div>
