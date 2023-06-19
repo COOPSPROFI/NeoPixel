@@ -4,7 +4,7 @@ function AddEventForm2() {
   const [title, setName] = useState("");
   const [desc, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [src, setImgUrl] = useState("");
+  const [img, setImgUrl] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = (event) => {
@@ -53,7 +53,7 @@ function AddEventForm2() {
         <br />
         <label>
           URL изображения:
-          <input type="text" value={src} onChange={e => setImgUrl(e.target.value)} />
+          <input type="text" value={img} onChange={e => setImgUrl(e.target.value)} />
         </label>
         <br />
         <button type="submit">Отправить</button>
