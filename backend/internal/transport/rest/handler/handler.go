@@ -71,6 +71,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			events.POST("", h.Event.Create)
 			events.PUT(":id", h.Event.Update)
 			events.DELETE(":id", h.Event.Delete)
+			events.POST("/upload-stl", h.Event.UploadSTL) // Обработчик загрузки файла STL
 		}
 		orders := api.Group("orders")
 		{

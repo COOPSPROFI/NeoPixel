@@ -2,9 +2,14 @@ package handler
 
 import (
 	"net/http"
+	"os"
+	"os/exec"
+	"path/filepath"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"neopixel3d.ru/internal/model"
 )
 
@@ -143,4 +148,67 @@ func (h *EventHandler) Update(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"event": updatedEvent,
 	})
+}
+
+func (h *EventHandler) UploadSTL(c *gin.Context) {
+	// Удаляем все файлы из папки "aaaaa"
+	err := removeAllFiles("aaaaa")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to remove existing files"})
+		return
+	}
+
+	file, err := c.FormFile("stlFile")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to retrieve STL file"})
+		return
+	}
+
+	// Генерируем уникальное имя для сохранения файла
+	filename := uuid.New().String() + filepath.Ext(file.Filename)
+	filePath := filepath.Join("aaaaa", filename) // Укажите путь к папке, где необходимо сохранить файл
+
+	if err := c.SaveUploadedFile(file, filePath); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save STL file"})
+		return
+	}
+
+	// Вызываем программу на Python для вычисления объема
+	cmd := exec.Command("py", "calculate_volume.py", filePath)
+	output, err := cmd.Output()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to calculate volume"})
+		return
+	}
+
+	// Преобразуем вывод в строку и удаляем лишние символы (переводы строк и т.д.)
+	volume := string(output)
+	volume = strings.TrimSpace(volume)
+
+	c.JSON(http.StatusOK, gin.H{"message": volume})
+}
+
+func removeAllFiles(dirPath string) error {
+	dir, err := os.Open(dirPath)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
+
+	// Получаем список всех файлов и папок в указанной директории
+	fileInfos, err := dir.Readdir(-1)
+	if err != nil {
+		return err
+	}
+
+	// Удаляем каждый файл
+	for _, fileInfo := range fileInfos {
+		filePath := filepath.Join(dirPath, fileInfo.Name())
+		err := os.RemoveAll(filePath)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

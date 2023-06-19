@@ -14,7 +14,7 @@ import Calcul from '../components/Calcul'
 import '../styles/Home.module.css'
 import Model from '../components/Model' 
 import TextModel from '../components/TextModel'
-
+import ModelUploader from '../components/ModelUploader'
 
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
       {/* <Login/> */}
       {/* <AddUserForm/> */}
       {/* <Calcul/> */}
-       
+      <ModelUploader/>
       <AddOrder/>
       <AddEventForm2/>
       <Banner />
