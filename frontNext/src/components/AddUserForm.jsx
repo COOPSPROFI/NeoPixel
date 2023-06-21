@@ -1,4 +1,3 @@
-// создай реакт компонент который состоит из формы с полями name email username password при заполнении которой отправляется post запрос на http://localhost:3000/api/register
 import React, { Component } from 'react';
 
 class AddUserForm extends Component {

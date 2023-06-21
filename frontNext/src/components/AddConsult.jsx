@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-export default function AddOrder() {
+export default function AddConsult() {
   const [state, setState] = React.useState({
     email: '',
     name: '',
-    tel: '',
-    printername: '',
-    description: ''
+    tel: ''
+
   });
 
   const handleChange = (e) => {
@@ -18,12 +17,12 @@ export default function AddOrder() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, name, tel, printername, description } = state;
+    const { email, name, tel } = state;
 
     try {
-      const response = await fetch('http://localhost:3000/api/orders', {
+      const response = await fetch('http://localhost:3000/api/consults', {
         method: 'POST',
-        body: JSON.stringify({ email, name, tel, printername, description }),
+        body: JSON.stringify({ email, name, tel}),
         headers: {
           'Content-Type': 'application/json'
         },
@@ -38,7 +37,7 @@ export default function AddOrder() {
     }
   };
 
-  const { email, name, tel, printername, description } = state;
+  const { email, name, tel } = state;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -54,15 +53,7 @@ export default function AddOrder() {
         <label>Tel:</label>
         <input type="text" name="tel" value={tel} onChange={handleChange} />
       </div>
-      <div>
-        <label>Printer Name:</label>
-        <input type="text" name="printername" value={printername} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea name="description" value={description} onChange={handleChange} />
-      </div>
-      <button type="submit">Add Order</button>
+      <button type="submit">Add Consult</button>
     </form>
   );
 }

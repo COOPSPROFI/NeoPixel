@@ -10,8 +10,7 @@ export default function EventTable() {
   }, []);
 
   const fetchEvents = () => {
-    axios
-      .get('http://localhost:3000/api/events')
+    axios.get('http://localhost:3000/api/events')
       .then((response) => {
         setEvents(response.data.events);
         console.log(response);

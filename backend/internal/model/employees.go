@@ -1,6 +1,6 @@
 package model
 
-type User struct {
+type Employees struct {
 	ID       int64  `db:"id" json:"id"`
 	Name     string `db:"name" json:"name"`
 	Email    string `db:"email" json:"email"`
@@ -9,14 +9,15 @@ type User struct {
 	Role     string `db:"role" json:"role"`
 }
 
-type UserInputRegister struct {
+type EmployeesInputRegister struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Role     string `json:"role"`
 }
 
-type UserInputLogin struct {
+type EmployeesInputLogin struct {
 	Username string
 	Password string
 }

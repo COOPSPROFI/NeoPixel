@@ -13,51 +13,61 @@ import (
 )
 
 func RequireAuth(c *gin.Context) {
-	// Get the cookie off req
+	// Получаем токен из cookie запроса
 	tokenString, err := c.Cookie("Authorization")
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
+		return
 	}
 
-	// Decode/validate it
+	// Декодируем/проверяем токен
 
-	// Parse takes the token string and a function for looking up the key. The latter is especially
+	// Функция Parse принимает строку токена и функцию для поиска ключа.
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		// Don't forget to validate the alg is what you expect:
+		// Убедитесь, что алгоритм соответствует ожидаемому значению:
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
 
-		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
 		return []byte(os.Getenv("SECRET")), nil
 	})
 
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		// Check the exp
-		if float64(time.Now().Unix()) > claims["exp"].(float64) {
-			c.AbortWithStatus(http.StatusUnauthorized)
-		}
-		// Find the user with token sub
-		var user model.User
-		// configs.DB.First(&user, claims["sub"])
-		err := configs.DB.QueryRow("SELECT id FROM users WHERE id=$1", claims["sub"]).Scan(&user.ID)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		if user.ID == 0 {
-			c.AbortWithStatus(http.StatusUnauthorized)
-		}
-
-		// Attach to req
-
-		c.Set("user", user)
-
-		// Continue
-
-		c.Next()
-	} else {
+	if err != nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
+		return
 	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		c.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+
+	// Проверяем срок действия токена
+	expiration, ok := claims["exp"].(float64)
+	if !ok || float64(time.Now().Unix()) > expiration {
+		c.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+
+	// Находим пользователя по ID из токена
+	var user model.User
+	err = configs.DB.QueryRow("SELECT id FROM users WHERE id=$1", claims["sub"]).Scan(&user.ID)
+	if err != nil {
+		fmt.Println(err)
+		c.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+
+	if user.ID == 0 {
+		c.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+
+	// Прикрепляем пользователя к контексту запроса
+	c.Set("user", user)
+
+	// Продолжаем выполнение следующего обработчика
+	c.Next()
 }
