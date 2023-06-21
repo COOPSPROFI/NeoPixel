@@ -99,7 +99,8 @@ export default function OrdersTable() {
   const sortedOrders = sortOrders(filteredOrders);
 
   return (
-    <div>
+    <div   className="flex justify-center items-center"  >
+      <div className="w-full max-w-4xl">
       <h2>Заказы</h2>
       <div>
         <label htmlFor="search">Поиск: </label>
@@ -126,30 +127,30 @@ export default function OrdersTable() {
           {sortOrder === "asc" ? "⬆" : "⬇"}
         </button>
       </div>
-      <table>
+      <table className="table-auto border-collapse border border-slate-400">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Имя</th>
-            <th>Телефон</th>
-            <th>Название принтера</th>
-            <th>Описание</th>
-            <th>Дата</th>
-            <th>Статус</th>
+            <th className="border border-slate-300">ID</th>
+            <th className="border border-slate-300">Email</th>
+            <th className="border border-slate-300">Имя</th>
+            <th className="border border-slate-300">Телефон</th>
+            <th className="border border-slate-300">Название принтера</th>
+            <th className="border border-slate-300">Описание</th>
+            <th className="border border-slate-300">Дата</th>
+            <th className="border border-slate-300">Статус</th>
           </tr>
         </thead>
         <tbody>
           {sortedOrders.map((order, index) => (
             <tr key={index}>
-              <td>{order.id}</td>
-              <td>{order.email}</td>
-              <td>{order.name}</td>
-              <td>{order.tel}</td>
-              <td>{order.printername}</td>
-              <td>{order.description}</td>
-              <td>{order.date}</td>
-              <td>
+              <td className="border border-slate-300">{order.id}</td>
+              <td className="border border-slate-300">{order.email}</td>
+              <td className="border border-slate-300">{order.name}</td>
+              <td className="border border-slate-300">{order.tel}</td>
+              <td className="border border-slate-300">{order.printername}</td>
+              <td className="border border-slate-300">{order.description}</td>
+              <td className="border border-slate-300">{order.date}</td>
+              <td className="border border-slate-300">
                 <select
                   value={order.status}
                   onChange={(e) => handleStatusChange(order.id, e.target.value)}
@@ -163,6 +164,7 @@ export default function OrdersTable() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

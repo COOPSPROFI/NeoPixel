@@ -11,25 +11,29 @@ import Specifications from "../components/Specifications";
 import Sphers from "../components/Sphers";
 import Vlare from "../components/Vlare";
 import Comfort from "../components/Сomfort";
+import TextModel from "../components/TextModel"
+import ModelUploader from "@/components/ModelUploader";
 import OrderTable from '../components/OrderTable';
 import EventsTable from '../components/EventsTable'
+import Link from "next/link";
 
 export default function Printers() {
     return (
         <div>
-            <OrderTable/>
-            {/* <EventsTable/> */}
-            <BannerForPrinter/>
+            <BannerForPrinter usePicture2={false}/>
             <PrinterDescription />
             <Specifications />
+            <AddOrder/>    
+
             <Sphers/>
             <Quality/>
             <PrintSpeed/>
             <Interface/>
             <Vlare/>
             <Exampl/>
+
+            <TextModel/>
             <Comfort/>
-            <AddOrder/>
             <Download/>
             <FooterLite/>
         </div>

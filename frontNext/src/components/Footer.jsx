@@ -13,6 +13,7 @@ const FooterMob = () => {
                 <div className=' mx-auto text-center laptop:max-w-3xl laptop:pt-[100px]'>
                 <h1 className='uppercase text-white text-2xl font-semibold laptop:text-6xl'><span className=' text-[#26AAE1]'>несравнимый аналог.</span> доступная цена</h1>
                 </div>
+                <a name="contact"></a>
             </div>
             
             <div className=' grid grid-cols-1 gap-3  mx-auto text-white pt-[20px] place-items-center w-full laptop:flex laptop:gap-3 laptop:justify-around laptop:pt-[100px] laptop:pb-[150px]'>      

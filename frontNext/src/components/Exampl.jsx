@@ -12,6 +12,7 @@ import Image from 'next/image';
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
+import ModelUploader from "./ModelUploader";
 
 export default function Exampl() {
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Link from "next/link";
 export default function Login({ setIsAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +34,7 @@ export default function Login({ setIsAuthenticated }) {
   return (
     <div className="bg-[#171616] py-[50px] laptop:py-[100px] flex flex-col justify-center items-center min-h-screen">
       <div className="text-white flex mx-auto p-[10px] justify-center laptop:max-w-7xl laptop:mb-[140px]">
+      
         <div className="text-lg text-white font-HelveticaNeueCyr font-semibold text-center mb-2 laptop:text-5xl">
           АВТОРИЗАЦИЯ
         </div>
@@ -69,6 +70,7 @@ export default function Login({ setIsAuthenticated }) {
         >
           Войти
         </button>
+        <Link href="/" className="text-blue-500">Главная</Link> 
       </form>
     </div>
   );

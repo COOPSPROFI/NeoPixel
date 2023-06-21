@@ -33,6 +33,8 @@ export default function AddEventForm2() {
   };
 
   return (
+    <div   className="flex justify-center items-center"  >
+    <div className="w-full max-w-4xl">
     <div>
       {success && <p>Мероприятие успешно добавлено!</p>} {/* Отображать сообщение об успешной загрузке при success === true */}
       <form onSubmit={handleSubmit}>
@@ -59,6 +61,7 @@ export default function AddEventForm2() {
         <button type="submit">Отправить</button>
       </form>
     </div>
+    </div></div>
   );
 }
 

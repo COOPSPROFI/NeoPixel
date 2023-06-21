@@ -15,10 +15,10 @@ export default function NavBarPrinter() {
 				<div className='flex items-center w-full'>
 					<nav className="flex text-white text-sm flex-row gap-2 mx-auto laptop:gap-10 items-center laptop:leading-6 laptop:text-xl">
 						<Link href="/" className="hover:text-blue-600">Главная</Link>
-						<Link href="/printers" className="text-blue-500">Принтеры</Link>
-						<Link href="/404" className="hover:text-blue-600">Мероприятия</Link>
-						<Link href="/404" className="hover:text-blue-600">Контакты</Link>
-						<Link href="/Login" className="hover:text-blue-600">Войти</Link>
+						<Link href="/Printers" className="text-blue-500">Принтеры</Link>
+						<Link href="/#event" className="hover:text-blue-600">Мероприятия</Link>
+						<Link href="/#contact" className="hover:text-blue-600">Контакты</Link>
+						<Link href="/Admin" className="hover:text-blue-600">Войти</Link>
 					</nav>
 				</div>
 			</div>

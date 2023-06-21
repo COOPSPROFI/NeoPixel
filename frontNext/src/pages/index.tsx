@@ -1,6 +1,6 @@
 import Banner from '../components/Banner'
 import UsageSpheres from '../components/UsageSpheres'
-import AddOrder from '../components/AddOrder'
+import AddConsult from '../components/AddConsult'
 import QA from '../components/QA'
 import Footer from '../components/Footer'
 import Gallery from '../components/Gallery'
@@ -19,20 +19,11 @@ import ModelUploader from '../components/ModelUploader'
 export default function Home() {
   return (
     <div>
-
-      {/* <AddUserForm/> */}
-      {/* <Calcul/> */}
-      <ModelUploader/>
-      <AddOrder/>
-      <AddEventForm2/>
       <Banner />
       <UsageSpheres />
-      {/* <TextModel/> */}
+      <AddConsult /> 
       <Events/>
-      {/* <EventNoApi/> */}
       <Gallery />     
-      <AddOrder /> 
-
       <QA />
       <Footer />
     </div>

@@ -99,6 +99,8 @@ export default function ConsultsTable() {
   const sortedConsults = sortConsults(filteredConsults);
 
   return (
+    <div   className="flex justify-center items-center"  >
+    <div className="w-full max-w-4xl">
     <div>
       <h2>Заказы</h2>
       <div>
@@ -126,26 +128,26 @@ export default function ConsultsTable() {
           {sortConsult === "asc" ? "⬆" : "⬇"}
         </button>
       </div>
-      <table>
+      <table className="table-auto border-collapse border border-slate-400">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Имя</th>
-            <th>Телефон</th>
-            <th>Дата</th>
-            <th>Статус</th>
+            <th className="border border-slate-300">ID</th>
+            <th className="border border-slate-300">Email</th>
+            <th className="border border-slate-300">Имя</th>
+            <th className="border border-slate-300">Телефон</th>
+            <th className="border border-slate-300">Дата</th>
+            <th className="border border-slate-300">Статус</th>
           </tr>
         </thead>
         <tbody>
           {sortedConsults.map((consult, index) => (
             <tr key={index}>
-              <td>{consult.id}</td>
-              <td>{consult.email}</td>
-              <td>{consult.name}</td>
-              <td>{consult.tel}</td>
-              <td>{consult.date}</td>
-              <td>
+              <td className="border border-slate-300">{consult.id}</td>
+              <td className="border border-slate-300">{consult.email}</td>
+              <td className="border border-slate-300">{consult.name}</td>
+              <td className="border border-slate-300">{consult.tel}</td>
+              <td className="border border-slate-300">{consult.date}</td>
+              <td className="border border-slate-300">
                 <select
                   value={consult.status}
                   onChange={(e) => handleStatusChange(consult.id, e.target.value)}
@@ -159,6 +161,8 @@ export default function ConsultsTable() {
           ))}
         </tbody>
       </table>
+    </div>
+    </div>
     </div>
   );
 }

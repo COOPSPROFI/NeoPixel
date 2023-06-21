@@ -1,6 +1,8 @@
 export default function AddEventForm() {
     return (
-        <div className="bg-black">
+        <div   className="flex justify-center items-center"  >
+        <div className="w-full max-w-4xl">
+      <div className="bg-black">
             <div class="p-8 rounded border border-gray-200"> 
                 <h1 class="font-medium text-3xl text-white">Добавить мероприятие</h1>
                 <form>
@@ -29,6 +31,8 @@ export default function AddEventForm() {
                     </div>
                 </form>
             </div>
+        </div>
+        </div>
         </div>
     )
 }

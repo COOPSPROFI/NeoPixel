@@ -39,7 +39,7 @@ useEffect(() => {
 		<div className='bg-[#171616] py-[50px] laptop:py-[100px]'>
 			<div className="max-w-[1400px] mx-auto">
 				<div className='uppercase text-white flex max-w-[1400px] mx-auto laptop:mb-[140px] mb-[40px] border-b-4 border-white-600 p-[10px] text-2xl place-content-between'>
-						<div>Мероприятия</div>
+						<div>Мероприятия<a name="event"></a></div>
 						<div className="flex items-center gap-3">
 							<div onClick={handlePrev}>
 								<svg width="33" height="16" viewBox="0 0 33 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer">

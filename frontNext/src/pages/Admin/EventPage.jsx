@@ -24,7 +24,6 @@ export default function EventPage() {
       <div>
         <NavBarAdmin/>
         <div className='bg-[#1E1F21] laptop:py-[150px] p-[30px]'></div>
-        <button onClick={handleLogout}>Logout</button>
         <AddEventForm2/>
         <EventTable/>
       </div>
