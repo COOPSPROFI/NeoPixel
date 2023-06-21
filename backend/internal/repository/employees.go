@@ -42,3 +42,23 @@ func (r *EmployeesRepository) CreateNewEmployee(employee *model.Employees) error
 func (r *EmployeesRepository) ValidateEmployee() (struct{}, error) {
 	return struct{}{}, nil
 }
+
+func (r *EmployeesRepository) GetAllEmployees() ([]model.Employees, error) {
+	rows, err := r.DB.Query("SELECT id, name, email, username, password, role FROM employees")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	employees := []model.Employees{}
+	for rows.Next() {
+		var employee model.Employees
+		err := rows.Scan(&employee.ID, &employee.Name, &employee.Email, &employee.Username, &employee.Password, &employee.Role)
+		if err != nil {
+			return nil, err
+		}
+		employees = append(employees, employee)
+	}
+
+	return employees, nil
+}

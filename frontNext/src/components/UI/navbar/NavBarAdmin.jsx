@@ -1,8 +1,14 @@
 import Link from "next/link"
 import logo from './logo2.svg'
 import Image from 'next/image';
+import { useRouter } from "next/router";
 
 export default function NavBarAdmin() {
+	const router = useRouter();
+	const handleLogout = () => {
+		localStorage.removeItem("isAuthenticated"); // Удалить значение из localStorage
+		router.push("/Admin"); // Перенаправить на страницу авторизации
+	  };
   return (
       	<div className='w-full top-12 py-[30px] z-10 bg-[#1E1F21] laptop:absolute laptop:bg-transparent '>
             <div className='flex justify-center laptop:absolute relative laptop:invisible visible py-[20px] mx-5'>
@@ -14,13 +20,12 @@ export default function NavBarAdmin() {
 				</div>
 				<div className='flex items-center w-full'>
 					<nav className="flex text-white text-sm flex-row gap-2 mx-auto laptop:gap-10 items-center laptop:leading-6 laptop:text-xl">
-						<Link href="/Admin" className="text-blue-500">ГлавнаяA</Link>
 						<Link href="/Admin/EventPage" className="hover:text-blue-600">Мероприятия</Link>
 						<Link href="/Admin/OrderPage" className="hover:text-blue-600">Заказы</Link>
-						<Link href="/Admin/Zayavki" className="hover:text-blue-600">Заявки</Link>
+						<Link href="/Admin/ConsultPage" className="hover:text-blue-600">Заявки</Link>
 						<Link href="/Admin/EmployeesPage" className="hover:text-blue-600">Сотрудники</Link>
 						<Link href="/Admin/Gallery" className="hover:text-blue-600">Галерея</Link>
-						<Link href="/Login" className="hover:text-blue-600">Войти</Link>
+						<button onClick={handleLogout}>Выйти</button>
 					</nav>
 				</div>
 			</div>

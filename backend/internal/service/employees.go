@@ -16,6 +16,7 @@ type EmployeesRepository interface {
 	GetEmployeeByUsernameOrEmail(string, string) model.Employees
 	GetEmployeeByUsername(string) model.Employees
 	CreateNewEmployee(*model.Employees) error
+	GetAllEmployees() ([]model.Employees, error)
 }
 
 type EmployeesService struct {
@@ -94,4 +95,22 @@ func (s *EmployeesService) Login(c *gin.Context) string {
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 
 	return tokenString
+}
+
+func (s *EmployeesService) GetRole(username, password string) string {
+	employee := s.EmployeesRepository.GetEmployeeByUsername(username)
+	if employee.ID == 0 {
+		return ""
+	}
+
+	err := bcrypt.CompareHashAndPassword([]byte(employee.Password), []byte(password))
+	if err != nil {
+		return ""
+	}
+
+	return employee.Role
+}
+
+func (s *EmployeesService) GetAll() ([]model.Employees, error) {
+	return s.EmployeesRepository.GetAllEmployees()
 }

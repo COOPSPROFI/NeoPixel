@@ -72,6 +72,8 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		api.POST("employees/login", h.Employees.Login)
 		api.GET("employees/logout", h.Employees.Logout)
 		api.GET("employees/validate", h.Employees.Validate)
+		api.POST("employees/getrole", h.Employees.GetRole)
+		api.GET("employees", h.Employees.GetAll) // добавленный обработчик GetAll
 
 		events := api.Group("events")
 		{
@@ -98,6 +100,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			consults.POST("", h.Consult.Create)
 			consults.PUT(":id", h.Consult.Update)
 			consults.DELETE(":id", h.Consult.Delete)
+			consults.PUT(":id/status", h.Consult.UpdateStatus)
 		}
 	}
 	return router

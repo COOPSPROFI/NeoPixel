@@ -11,6 +11,8 @@ import (
 type EmployeesService interface {
 	Register(c *gin.Context) error
 	Login(c *gin.Context) string
+	GetRole(username, password string) string
+	GetAll() ([]model.Employees, error) // Added GetAll function
 }
 
 type EmployeesHandler struct {
@@ -64,4 +66,38 @@ func (h *EmployeesHandler) Validate(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"employee": employee,
 	})
+}
+
+func (h *EmployeesHandler) GetRole(c *gin.Context) {
+	var EmployeesInputLogin model.EmployeesInputLogin
+	if c.Bind(&EmployeesInputLogin) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to read request",
+		})
+		return
+	}
+
+	role := h.service.GetRole(EmployeesInputLogin.Username, EmployeesInputLogin.Password)
+	if role == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid username or password",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"role": role,
+	})
+}
+
+func (h *EmployeesHandler) GetAll(c *gin.Context) {
+	employees, err := h.service.GetAll()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to get employees",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, employees)
 }
