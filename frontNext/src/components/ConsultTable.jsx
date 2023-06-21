@@ -16,7 +16,7 @@ export default function ConsultsTable() {
   }, []);
 
   const handleStatusChange = (consultId, status) => {
-    axios.put(`http://localhost:3000/api/consults/${consultId}`, { status })
+    axios.put(`http://localhost:3000/api/consults/${consultId}/status`, { status })
       .then((result) => {
         console.log(result);
         // Update the consult status in the local state
