@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 
-class AddOrder extends Component {
-  state = {
+export default function AddOrder() {
+  const [state, setState] = React.useState({
     email: '',
     name: '',
     tel: '',
     printername: '',
     description: ''
-  };
+  });
 
-  handleChange = (e) => {
-    this.setState({
+  const handleChange = (e) => {
+    setState({
+      ...state,
       [e.target.name]: e.target.value
     });
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, name, tel, printername, description } = this.state;
+    const { email, name, tel, printername, description } = state;
 
     try {
       const response = await fetch('http://localhost:3000/api/orders', {
@@ -37,35 +38,33 @@ class AddOrder extends Component {
     }
   };
 
-  render() {
-    const { email, name, tel, printername, description } = this.state;
+  const { email, name, tel, printername, description } = state;
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={this.handleChange} />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={name} onChange={this.handleChange} />
-        </div>
-        <div>
-          <label>Tel:</label>
-          <input type="text" name="tel" value={tel} onChange={this.handleChange} />
-        </div>
-        <div>
-          <label>Printer Name:</label>
-          <input type="text" name="printername" value={printername} onChange={this.handleChange} />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea name="description" value={description} onChange={this.handleChange} />
-        </div>
-        <button type="submit">Add Order</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Email:</label>
+        <input type="email" name="email" value={email} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Name:</label>
+        <input type="text" name="name" value={name} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Tel:</label>
+        <input type="text" name="tel" value={tel} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Printer Name:</label>
+        <input type="text" name="printername" value={printername} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea name="description" value={description} onChange={handleChange} />
+      </div>
+      <button type="submit">Add Order</button>
+    </form>
+  );
 }
 
-export default AddOrder;
+

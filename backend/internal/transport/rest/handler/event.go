@@ -151,7 +151,7 @@ func (h *EventHandler) Update(c *gin.Context) {
 }
 
 func (h *EventHandler) UploadSTL(c *gin.Context) {
-	// Удаляем все файлы из папки "aaaaa"
+
 	err := removeAllFiles("aaaaa")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to remove existing files"})
@@ -164,16 +164,14 @@ func (h *EventHandler) UploadSTL(c *gin.Context) {
 		return
 	}
 
-	// Генерируем уникальное имя для сохранения файла
 	filename := uuid.New().String() + filepath.Ext(file.Filename)
-	filePath := filepath.Join("aaaaa", filename) // Укажите путь к папке, где необходимо сохранить файл
+	filePath := filepath.Join("aaaaa", filename)
 
 	if err := c.SaveUploadedFile(file, filePath); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save STL file"})
 		return
 	}
 
-	// Вызываем программу на Python для вычисления объема
 	cmd := exec.Command("py", "calculate_volume.py", filePath)
 	output, err := cmd.Output()
 	if err != nil {
@@ -181,7 +179,6 @@ func (h *EventHandler) UploadSTL(c *gin.Context) {
 		return
 	}
 
-	// Преобразуем вывод в строку и удаляем лишние символы (переводы строк и т.д.)
 	volume := string(output)
 	volume = strings.TrimSpace(volume)
 

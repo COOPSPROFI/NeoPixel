@@ -17,8 +17,8 @@ import EventsTable from '../components/EventsTable'
 export default function Printers() {
     return (
         <div>
-            {/* <OrderTable/> */}
-            <EventsTable/>
+            <OrderTable/>
+            {/* <EventsTable/> */}
             <BannerForPrinter/>
             <PrinterDescription />
             <Specifications />

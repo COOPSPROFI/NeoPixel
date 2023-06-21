@@ -20,17 +20,19 @@ func main() {
 	db := repository.New(configs.DB)
 
 	services := service.New(service.Deps{
-		EventRepository:   db.EventRepository,
-		OrderRepository:   db.OrderRepository,
-		ConsultRepository: db.ConsultRepository,
-		AuthRepository:    db.AuthRepository,
+		EventRepository:     db.EventRepository,
+		OrderRepository:     db.OrderRepository,
+		ConsultRepository:   db.ConsultRepository,
+		AuthRepository:      db.AuthRepository,
+		EmployeesRepository: db.EmployeesRepository,
 	})
 
 	handlers := handler.New(handler.Deps{
-		EventService:   services.EventService,
-		OrderService:   services.OrderService,
-		ConsultService: services.ConsultService,
-		AuthService:    services.AuthService,
+		EventService:     services.EventService,
+		OrderService:     services.OrderService,
+		ConsultService:   services.ConsultService,
+		AuthService:      services.AuthService,
+		EmployeesService: services.EmployeesService,
 	}).Init()
 
 	server := rest.NewServer(os.Getenv("PORT"), handlers)

@@ -9,25 +9,28 @@ import (
 )
 
 type Deps struct {
-	EventService   EventService
-	OrderService   OrderService
-	ConsultService ConsultService
-	AuthService    AuthService
+	EventService     EventService
+	OrderService     OrderService
+	ConsultService   ConsultService
+	AuthService      AuthService
+	EmployeesService EmployeesService
 }
 
 type Handler struct {
-	Event   *EventHandler
-	Order   *OrderHandler
-	Consult *ConsultHandler
-	Auth    *AuthHandler
+	Event     *EventHandler
+	Order     *OrderHandler
+	Consult   *ConsultHandler
+	Auth      *AuthHandler
+	Employees *EmployeesHandler
 }
 
 func New(deps Deps) *Handler {
 	return &Handler{
-		Event:   NewEventHandler(deps.EventService),
-		Order:   NewOrderHandler(deps.OrderService),
-		Consult: NewConsultHandler(deps.ConsultService),
-		Auth:    NewAuthHandler(deps.AuthService),
+		Event:     NewEventHandler(deps.EventService),
+		Order:     NewOrderHandler(deps.OrderService),
+		Consult:   NewConsultHandler(deps.ConsultService),
+		Auth:      NewAuthHandler(deps.AuthService),
+		Employees: NewEmployeesHandler(deps.EmployeesService),
 	}
 }
 
@@ -64,6 +67,12 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		api.POST("register", h.Auth.Register)
 		api.GET("logout", h.Auth.Logout)
 		api.GET("validate", h.Auth.Validate)
+
+		api.POST("employees/register", h.Employees.Register)
+		api.POST("employees/login", h.Employees.Login)
+		api.GET("employees/logout", h.Employees.Logout)
+		api.GET("employees/validate", h.Employees.Validate)
+
 		events := api.Group("events")
 		{
 			events.GET("", h.Event.Get)
@@ -81,6 +90,14 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			orders.PUT(":id", h.Order.Update)
 			orders.DELETE(":id", h.Order.Delete)
 			orders.PUT(":id/status", h.Order.UpdateStatus)
+		}
+		consults := api.Group("consults")
+		{
+			consults.GET("", h.Consult.Get)
+			consults.GET(":id", h.Consult.GetById)
+			consults.POST("", h.Consult.Create)
+			consults.PUT(":id", h.Consult.Update)
+			consults.DELETE(":id", h.Consult.Delete)
 		}
 	}
 	return router

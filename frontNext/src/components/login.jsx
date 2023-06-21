@@ -5,10 +5,11 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
-
+  const [error, setError] = useState("");
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("http://localhost:3000/api/employees/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +17,14 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    setToken(data.token);
+    
+    if (response.ok) {
+      setToken(data.token); // Сохраните токен в состоянии при успешном входе
+      setError(""); // Сбросьте ошибку входа, если она была установлена
+    } else {
+      setError(data.message); // Установите ошибку входа в случае неуспешного входа
+      setToken(""); // Сбросьте токен в состоянии
+    }
   };
 
   return (

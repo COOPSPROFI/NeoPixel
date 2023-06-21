@@ -80,7 +80,7 @@ useEffect(() => {
 						<Swiper ref={sliderRefImage} initialSlide={0} slidesPerView={1} spaceBetween={0} slidesPerGroup={1}  loop={false}  pagination={{ clickable: true, }} navigation={false} modules={[]} allowTouchMove={false} className="myImageEventSwiper">
 							{events.map((char, index) =>
 								<SwiperSlide key={index} className="block">
-							<img src={char.src} fill  alt="" />
+							<img src={char.img} fill  alt="" />
 								</SwiperSlide>
 							)}
 						</Swiper>

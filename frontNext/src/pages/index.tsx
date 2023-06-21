@@ -28,7 +28,7 @@ export default function Home() {
       <AddEventForm2/>
       <Banner />
       <UsageSpheres />
-      <TextModel/>
+      {/* <TextModel/> */}
       <Events/>
       {/* <EventNoApi/> */}
       <Gallery />     

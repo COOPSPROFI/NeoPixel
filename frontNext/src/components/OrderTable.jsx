@@ -147,7 +147,7 @@ export default function OrdersTable() {
               <td>{order.name}</td>
               <td>{order.tel}</td>
               <td>{order.printername}</td>
-              <td>{order.desc}</td>
+              <td>{order.description}</td>
               <td>{order.date}</td>
               <td>
                 <select

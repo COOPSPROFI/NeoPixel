@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-function AddEventForm2() {
+export default function AddEventForm2() {
   const [title, setName] = useState("");
-  const [desc, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [img, setImgUrl] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const eventData = { title, desc, date, src };
+    const eventData = { title, description, date, img };
     fetch('http://localhost:3000/api/events', {
       method: 'POST',
       headers: {
@@ -43,7 +43,7 @@ function AddEventForm2() {
         <br />
         <label>
           Описание:
-          <textarea value={desc} onChange={e => setDescription(e.target.value)} />
+          <textarea value={description} onChange={e => setDescription(e.target.value)} />
         </label>
         <br />
         <label>
@@ -62,4 +62,4 @@ function AddEventForm2() {
   );
 }
 
-export default AddEventForm2;
+
