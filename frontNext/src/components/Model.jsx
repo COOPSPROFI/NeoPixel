@@ -12,7 +12,7 @@ const Model = () => {
 
   useEffect(() => {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1E1F21); // Установка цвета фона сцены
+    scene.background = new THREE.Color(0x1E1F21);
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(
@@ -30,19 +30,19 @@ const Model = () => {
       mountRef.current.clientHeight
     );
     rendererRef.current = renderer;
-    renderer.shadowMap.enabled = true; // Включение отображения теней
+    renderer.shadowMap.enabled = true; 
     mountRef.current.appendChild(renderer.domElement);
 
     const loader = new STLLoader();
     loader.load('/testmodel.stl', geometry => {
       console.log(geometry);
-      const material = new THREE.MeshPhongMaterial({ color: 0xffffff }); // Используем MeshPhongMaterial для отображения теней
+      const material = new THREE.MeshPhongMaterial({ color: 0xffffff }); 
       const mesh = new THREE.Mesh(geometry, material);
       mesh.scale.set(0.1, 0.1, 0.1);
-      mesh.castShadow = true; // Включение отбрасывания теней
+      mesh.castShadow = true; 
       scene.add(mesh);
 
-      // Вывод информации о модели в консоль
+     
       console.log('Модель загружена:', mesh);
     });
 
@@ -52,9 +52,9 @@ const Model = () => {
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = 0.5;
 
-    const light = new THREE.DirectionalLight(0xffffff, 1); // Добавление направленного света
+    const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(0, 10, 0);
-    light.castShadow = true; // Включение отбрасывания теней от источника света
+    light.castShadow = true; 
     scene.add(light);
 
     const animate = () => {

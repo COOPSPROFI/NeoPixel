@@ -56,7 +56,7 @@ func (h *Handler) Init() *gin.Engine {
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})
-	router.Static("/assets", "./assets") // static img url
+	router.Static("/assets", "./assets")
 
 	h.initApi(router)
 
@@ -77,7 +77,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		api.GET("employees/validate", h.Employees.Validate)
 		api.POST("employees/getrole", h.Employees.GetRole)
 		api.GET("employees", h.Employees.GetAll)
-		api.GET("gallery", h.Gallery.Get) // добавленный обработчик GetAll
+		api.GET("gallery", h.Gallery.Get)
 
 		events := api.Group("events")
 		{
@@ -86,7 +86,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			events.POST("", h.Event.Create)
 			events.PUT(":id", h.Event.Update)
 			events.DELETE(":id", h.Event.Delete)
-			events.POST("/upload-stl", h.Event.UploadSTL) // Обработчик загрузки файла STL
+			events.POST("/upload-stl", h.Event.UploadSTL)
 		}
 		orders := api.Group("orders")
 		{

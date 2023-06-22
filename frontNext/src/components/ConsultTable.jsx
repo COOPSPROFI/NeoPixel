@@ -19,7 +19,6 @@ export default function ConsultsTable() {
     axios.put(`http://localhost:3000/api/consults/${consultId}/status`, { status })
       .then((result) => {
         console.log(result);
-        // Update the consult status in the local state
         const updatedConsults = consults.map(consult => {
           if (consult.id === consultId) {
             return {
@@ -67,10 +66,8 @@ export default function ConsultsTable() {
   const handleSortChange = (event) => {
     const selectedSortValue = event.target.value;
     if (selectedSortValue === sortValue) {
-      // If the same sort value is selected, toggle the sort consult
       setSortConsult(sortConsult === "asc" ? "desc" : "asc");
     } else {
-      // If a different sort value is selected, reset the sort consult to ascending
       setSortConsult("asc");
     }
     setSortValue(selectedSortValue);

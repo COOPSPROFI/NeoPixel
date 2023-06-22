@@ -40,15 +40,6 @@ export default function Specifications() {
              
                     )}
 
-                    {/* {content} */}
-
-
-                    {/* <div className='grid place-items-end w-[342px] pr-[15px]'>
-
-                    </div> */}
-                    {/* <div className='grid place-items-start w-[450px]'>
-
-                    </div> */}
                 </div>
             </div>
 		</div>
