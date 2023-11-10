@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-export default function Model() {
+const Model = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
@@ -65,15 +65,9 @@ export default function Model() {
     animate();
 
     return () => {
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
-        if (mountRef.current && rendererRef.current.domElement) {
-          mountRef.current.removeChild(rendererRef.current.domElement);
-        }
-      }
-      if (controlsRef.current) {
-        controlsRef.current.dispose();
-      }
+      rendererRef.current.dispose();
+      mountRef.current.removeChild(rendererRef.current.domElement);
+      controlsRef.current.dispose();
     };
   }, []);
 
@@ -82,4 +76,4 @@ export default function Model() {
   );
 };
 
-
+export default Model;
