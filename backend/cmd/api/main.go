@@ -25,6 +25,7 @@ func main() {
 		ConsultRepository:   db.ConsultRepository,
 		AuthRepository:      db.AuthRepository,
 		EmployeesRepository: db.EmployeesRepository,
+		GalleryRepository:   db.GalleryRepository,
 	})
 
 	handlers := handler.New(handler.Deps{
@@ -33,6 +34,7 @@ func main() {
 		ConsultService:   services.ConsultService,
 		AuthService:      services.AuthService,
 		EmployeesService: services.EmployeesService,
+		GalleryService:   services.GalleryService,
 	}).Init()
 
 	server := rest.NewServer(os.Getenv("PORT"), handlers)

@@ -21,10 +21,9 @@ export default function AddEmployeesForm() {
       });
 
       console.log(response.data);
-      // Обработка успешного ответа
+ 
     } catch (error) {
       console.error(error);
-      // Обработка ошибки
     }
   };
 

@@ -15,26 +15,26 @@ export default function OrdersTable() {
       });
   }, []);
 
-  const handleStatusChange = (orderId, status) => {
-    axios.put(`http://localhost:3000/api/orders/${orderId}`, { status })
-      .then((result) => {
-        console.log(result);
-        // Update the order status in the local state
-        const updatedOrders = orders.map(order => {
-          if (order.id === orderId) {
-            return {
-              ...order,
-              status: status
-            };
-          }
-          return order;
+    const handleStatusChange = (orderId, status) => {
+      axios.put(`http://localhost:3000/api/orders/${orderId}/status`, { status })
+        .then((result) => {
+          console.log(result);
+
+          const updatedOrders = orders.map(order => {
+            if (order.id === orderId) {
+              return {
+                ...order,
+                status: status
+              };
+            }
+            return order;
+          });
+          setOrders(updatedOrders);
+        })
+        .catch((error) => {
+          console.error(error);
         });
-        setOrders(updatedOrders);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+    };
 
   const sortOrders = (orders) => {
     const sortedOrders = [...orders];
@@ -67,10 +67,8 @@ export default function OrdersTable() {
   const handleSortChange = (event) => {
     const selectedSortValue = event.target.value;
     if (selectedSortValue === sortValue) {
-      // If the same sort value is selected, toggle the sort order
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-      // If a different sort value is selected, reset the sort order to ascending
       setSortOrder("asc");
     }
     setSortValue(selectedSortValue);

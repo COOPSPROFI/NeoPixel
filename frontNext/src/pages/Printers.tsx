@@ -12,10 +12,6 @@ import Sphers from "../components/Sphers";
 import Vlare from "../components/Vlare";
 import Comfort from "../components/Сomfort";
 import TextModel from "../components/TextModel"
-import ModelUploader from "@/components/ModelUploader";
-import OrderTable from '../components/OrderTable';
-import EventsTable from '../components/EventsTable'
-import Link from "next/link";
 
 export default function Printers() {
     return (

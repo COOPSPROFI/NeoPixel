@@ -12,8 +12,7 @@ type OrderService interface {
 	GetAll(ctx *gin.Context) ([]model.Order, error)
 	CreateOrder(ctx *gin.Context, order model.Order) (model.Order, error)
 	GetOrderById(ctx *gin.Context, id int64) (model.Order, error)
-	UpdateOrderStatus(ctx *gin.Context, id int64, status string) error // Added method for updating order status
-	// Implement other methods for Update and Delete
+	UpdateOrderStatus(ctx *gin.Context, id int64, status string) error
 }
 
 type OrderHandler struct {

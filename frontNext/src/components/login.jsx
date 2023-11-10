@@ -20,14 +20,14 @@ export default function Login({ setIsAuthenticated }) {
 
     if (response.ok) {
       if (data.role === "Admin") {
-        localStorage.setItem("isAuthenticated", "true"); // Сохранить флаг аутентификации в localStorage
-        setIsAuthenticated(true); // Установить флаг аутентификации в состоянии
-        setError(""); // Сбросить ошибку входа
+        localStorage.setItem("isAuthenticated", "true"); 
+        setIsAuthenticated(true);
+        setError(""); 
       } else {
         setError("Недостаточно прав доступа");
       }
     } else {
-      setError(data.message); // Установить ошибку входа в случае неуспешного входа
+      setError(data.message);
     }
   };
 

@@ -6,6 +6,7 @@ type Deps struct {
 	ConsultRepository   ConsultRepository
 	AuthRepository      AuthRepository
 	EmployeesRepository EmployeesRepository
+	GalleryRepository   GalleryRepository
 }
 
 type Service struct {
@@ -14,6 +15,7 @@ type Service struct {
 	ConsultService   *ConsultService
 	AuthService      *AuthService
 	EmployeesService *EmployeesService
+	GalleryService   *GalleryService
 }
 
 func New(deps Deps) *Service {
@@ -23,5 +25,6 @@ func New(deps Deps) *Service {
 		ConsultService:   NewConsultService(deps.ConsultRepository),
 		AuthService:      NewAuthService(deps.AuthRepository),
 		EmployeesService: NewEmployeesService(deps.EmployeesRepository),
+		GalleryService:   NewGalleryService(deps.GalleryRepository),
 	}
 }

@@ -10,6 +10,7 @@ type Repository struct {
 	ConsultRepository   *ConsultRepository
 	AuthRepository      *AuthRepository
 	EmployeesRepository *EmployeesRepository
+	GalleryRepository   *GalleryRepository
 }
 
 func New(conn *pgx.Conn) *Repository {
@@ -19,5 +20,6 @@ func New(conn *pgx.Conn) *Repository {
 		ConsultRepository:   NewConsultRepository(conn),
 		AuthRepository:      NewAuthRepository(conn),
 		EmployeesRepository: NewEmployeesRepository(conn),
+		GalleryRepository:   NewGalleryRepository(conn),
 	}
 }
