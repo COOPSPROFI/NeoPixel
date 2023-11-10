@@ -20,7 +20,7 @@ export default function AddConsult() {
     e.preventDefault();
     const { email, name, tel } = state;
 
-    // Проверка полей на пустоту
+
     if (email.trim() === '' || name.trim() === '' || tel.trim() === '') {
       alert('Пожалуйста, заполните все обязательные поля.');
       return;
@@ -37,12 +37,11 @@ export default function AddConsult() {
 
       const data = await response.json();
       console.log(data);
-      // Обработка успешного создания консультации
 
-      setIsSubmitted(true); // Устанавливаем значение isSubmitted в true
+      setIsSubmitted(true); 
     } catch (err) {
       console.error(err);
-      // Обработка ошибки
+
     }
   };
 
