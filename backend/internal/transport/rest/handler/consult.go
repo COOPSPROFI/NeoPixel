@@ -12,7 +12,8 @@ type ConsultService interface {
 	GetAll(ctx *gin.Context) ([]model.Consult, error)
 	CreateConsult(ctx *gin.Context, consult model.Consult) (model.Consult, error)
 	GetConsultById(ctx *gin.Context, id int64) (model.Consult, error)
-	UpdateConsultStatus(ctx *gin.Context, id int64, status string) error
+	UpdateConsultStatus(ctx *gin.Context, id int64, status string) error // Added method for updating Consult status
+	// Implement other methods for Update and Delete
 }
 
 type ConsultHandler struct {
