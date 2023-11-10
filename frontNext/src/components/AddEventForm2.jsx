@@ -21,7 +21,7 @@ export default function AddEventForm2() {
         if (!response.ok) {
           throw new Error("Ошибка отправки");
         }
-        setSuccess(true); 
+        setSuccess(true); // Установить состояние success в true при успешной отправке
         return response.json();
       })
       .then(data => {
@@ -36,7 +36,7 @@ export default function AddEventForm2() {
     <div   className="flex justify-center items-center"  >
     <div className="w-full max-w-4xl">
     <div>
-      {success && <p>Мероприятие успешно добавлено!</p>} 
+      {success && <p>Мероприятие успешно добавлено!</p>} {/* Отображать сообщение об успешной загрузке при success === true */}
       <form onSubmit={handleSubmit}>
         <label>
           Имя:

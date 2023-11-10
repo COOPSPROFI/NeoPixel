@@ -1,6 +1,8 @@
 import React, { useCallback, useRef } from "react";
+// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -8,6 +10,7 @@ import Image from 'next/image';
 import Link from "next/link";
 
 
+// import required modules
 
 export default function EventNoApi() {
 	const sliderRefText = useRef(null);

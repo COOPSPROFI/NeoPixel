@@ -12,7 +12,7 @@ type EmployeesService interface {
 	Register(c *gin.Context) error
 	Login(c *gin.Context) string
 	GetRole(username, password string) string
-	GetAll() ([]model.Employees, error)
+	GetAll() ([]model.Employees, error) // Added GetAll function
 }
 
 type EmployeesHandler struct {
@@ -34,7 +34,7 @@ func (h *EmployeesHandler) Register(c *gin.Context) {
 		})
 		return
 	}
-
+	// Respond
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "Successfully created employee",
 	})
@@ -43,6 +43,7 @@ func (h *EmployeesHandler) Register(c *gin.Context) {
 func (h *EmployeesHandler) Login(c *gin.Context) {
 	tokenString := h.service.Login(c)
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"token": tokenString,
 	})
@@ -52,6 +53,7 @@ func (h *EmployeesHandler) Logout(c *gin.Context) {
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
 	c.Set("employee", &model.Employees{})
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Successfully logged out",
 	})
@@ -60,6 +62,7 @@ func (h *EmployeesHandler) Logout(c *gin.Context) {
 func (h *EmployeesHandler) Validate(c *gin.Context) {
 	employee, _ := c.Get("employee")
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"employee": employee,
 	})

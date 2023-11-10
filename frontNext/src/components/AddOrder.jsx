@@ -20,7 +20,7 @@ export default function AddOrder() {
     e.preventDefault();
     const { email, name, tel, printername, description } = state;
 
-
+    // Проверка полей на пустоту
     if (email.trim() === '' || name.trim() === '' || tel.trim() === '' || printername.trim() === '') {
       alert('Пожалуйста, заполните все обязательные поля.');
       return;
@@ -37,8 +37,10 @@ export default function AddOrder() {
 
       const data = await response.json();
       console.log(data);
+      // Обработка успешного создания заказа
     } catch (err) {
       console.error(err);
+      // Обработка ошибки
     }
   };
 

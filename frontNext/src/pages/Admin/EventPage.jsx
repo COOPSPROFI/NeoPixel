@@ -9,14 +9,14 @@ export default function EventPage() {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    router.push("/Admin");
+    localStorage.removeItem("isAuthenticated"); // Удалить значение из localStorage
+    router.push("/Admin"); // Перенаправить на страницу авторизации
   };
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
     if (!isAuthenticated) {
-
+      // Пользователь не аутентифицирован, перенаправляем на страницу авторизации
       router.push("/Admin");
     }
   }, []);

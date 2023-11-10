@@ -32,7 +32,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		})
 		return
 	}
-
+	// Respond
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "success created user",
 	})
@@ -41,6 +41,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 func (h *AuthHandler) Login(c *gin.Context) {
 	tokenString := h.service.Login(c)
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"token": tokenString,
 	})
@@ -50,6 +51,7 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
 	c.Set("user", &model.User{})
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"message": "success unauthorized",
 	})
@@ -58,6 +60,7 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 func (h *AuthHandler) Validate(c *gin.Context) {
 	user, _ := c.Get("user")
 
+	// Respond
 	c.JSON(http.StatusOK, gin.H{
 		"user": user,
 	})

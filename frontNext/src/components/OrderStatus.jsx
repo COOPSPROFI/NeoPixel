@@ -17,11 +17,11 @@ const OrderStatus = () => {
     event.preventDefault();
     
     try {
-  
+      // Отправляем запрос на изменение статуса заказа
       await axios.put(`/api/orders/${orderId}/status`, { status });
       console.log('Статус заказа успешно изменен');
       
-     
+      // Очищаем поля формы
       setOrderId('');
       setStatus('');
     } catch (error) {

@@ -192,11 +192,13 @@ func removeAllFiles(dirPath string) error {
 	}
 	defer dir.Close()
 
+	// Получаем список всех файлов и папок в указанной директории
 	fileInfos, err := dir.Readdir(-1)
 	if err != nil {
 		return err
 	}
 
+	// Удаляем каждый файл
 	for _, fileInfo := range fileInfos {
 		filePath := filepath.Join(dirPath, fileInfo.Name())
 		err := os.RemoveAll(filePath)
