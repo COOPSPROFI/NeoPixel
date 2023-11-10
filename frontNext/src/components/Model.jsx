@@ -66,7 +66,9 @@ const Model = () => {
 
     return () => {
       rendererRef.current.dispose();
-      mountRef.current.removeChild(rendererRef.current.domElement);
+      if (mountRef.current) {
+        mountRef.current.removeChild(rendererRef.current.domElement);
+      }
       controlsRef.current.dispose();
     };
   }, []);
