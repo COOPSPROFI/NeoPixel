@@ -14,7 +14,6 @@ type Deps struct {
 	ConsultService   ConsultService
 	AuthService      AuthService
 	EmployeesService EmployeesService
-	GalleryService   GalleryService
 }
 
 type Handler struct {
@@ -23,7 +22,6 @@ type Handler struct {
 	Consult   *ConsultHandler
 	Auth      *AuthHandler
 	Employees *EmployeesHandler
-	Gallery   *GalleryHandler
 }
 
 func New(deps Deps) *Handler {
@@ -33,7 +31,6 @@ func New(deps Deps) *Handler {
 		Consult:   NewConsultHandler(deps.ConsultService),
 		Auth:      NewAuthHandler(deps.AuthService),
 		Employees: NewEmployeesHandler(deps.EmployeesService),
-		Gallery:   NewGalleryHandler(deps.GalleryService),
 	}
 }
 
@@ -76,8 +73,7 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 		api.GET("employees/logout", h.Employees.Logout)
 		api.GET("employees/validate", h.Employees.Validate)
 		api.POST("employees/getrole", h.Employees.GetRole)
-		api.GET("employees", h.Employees.GetAll)
-		api.GET("gallery", h.Gallery.Get) // добавленный обработчик GetAll
+		api.GET("employees", h.Employees.GetAll) // добавленный обработчик GetAll
 
 		events := api.Group("events")
 		{
@@ -106,7 +102,6 @@ func (h *Handler) initApi(router *gin.Engine) *gin.Engine {
 			consults.DELETE(":id", h.Consult.Delete)
 			consults.PUT(":id/status", h.Consult.UpdateStatus)
 		}
-
 	}
 	return router
 }
